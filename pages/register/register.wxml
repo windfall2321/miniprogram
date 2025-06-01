@@ -1,31 +1,59 @@
-<view class="container">
+<view class="register-container">
   <view class="register-box">
-    <view class="title">注册</view>
-    <view class="input-group">
-      <input 
-        class="input" 
-        placeholder="请输入用户名" 
-        bindinput="onUsernameInput"
-        value="{{username}}"
-      />
-      <input 
-        class="input" 
-        placeholder="请输入密码" 
-        password 
-        bindinput="onPasswordInput"
-        value="{{password}}"
-      />
-      <input 
-        class="input" 
-        placeholder="请确认密码" 
-        password 
-        bindinput="onConfirmPasswordInput"
-        value="{{confirmPassword}}"
-      />
+    <!-- 顶部标题 -->
+    <view class="header">
+      <text class="title">创建账号</text>
+      <text class="subtitle">Create Account</text>
     </view>
+
+    <!-- 注册表单 -->
+    <view class="form-group">
+      <view class="input-group">
+        <text class="input-icon">👤</text>
+        <input 
+          class="input" 
+          placeholder="请输入用户名" 
+          placeholder-class="placeholder"
+          bindinput="onUsernameInput"
+          value="{{username}}"
+        />
+      </view>
+      <view class="input-group">
+        <text class="input-icon">🔒</text>
+        <input 
+          class="input" 
+          placeholder="请输入密码" 
+          placeholder-class="placeholder"
+          password 
+          bindinput="onPasswordInput"
+          value="{{password}}"
+        />
+      </view>
+      <view class="input-group">
+        <text class="input-icon">🔒</text>
+        <input 
+          class="input" 
+          placeholder="请确认密码" 
+          placeholder-class="placeholder"
+          password 
+          bindinput="onConfirmPasswordInput"
+          value="{{confirmPassword}}"
+        />
+      </view>
+    </view>
+
+    <!-- 按钮组 -->
     <view class="btn-group">
-      <button class="btn register-btn" bindtap="handleRegister">注册</button>
-      <button class="btn login-btn" bindtap="goToLogin">返回登录</button>
+      <button class="register-btn" bindtap="handleRegister">注册</button>
+      <button class="login-btn" bindtap="goToLogin">返回登录</button>
+    </view>
+
+    <!-- 用户协议 -->
+    <view class="agreement">
+      <text class="agreement-text">注册即表示同意</text>
+      <text class="agreement-link">《用户协议》</text>
+      <text class="agreement-text">和</text>
+      <text class="agreement-link">《隐私政策》</text>
     </view>
   </view>
 </view> 

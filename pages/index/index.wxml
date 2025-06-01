@@ -1,27 +1,46 @@
 <!--index.wxml-->
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
-        </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+<view class="page-container">
+  <!-- 顶部用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-info">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="user-detail">
+        <text class="username">{{userInfo.username}}</text>
+        <text class="welcome-text">欢迎回来</text>
+      </view>
     </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
+    <button class="edit-btn" bindtap="handleEditProfile">编辑资料</button>
+  </view>
+
+  <!-- 功能卡片区域 -->
+  <view class="content">
+    <!-- 用户信息卡片 -->
+    <view class="info-card">
+      <view class="card-header">
+        <text class="card-title">个人信息</text>
+        <text class="card-subtitle">User Information</text>
+      </view>
+      <view class="info-list">
+        <view class="info-item">
+          <view class="info-label">
+            <text class="icon">👤</text>
+            <text>用户名</text>
+          </view>
+          <text class="info-value">{{userInfo.username}}</text>
+        </view>
+        <view class="info-item">
+          <view class="info-label">
+            <text class="icon">📅</text>
+            <text>注册时间</text>
+          </view>
+          <text class="info-value">{{userInfo.createTime}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 退出登录按钮 -->
+    <view class="logout-section">
+      <button class="logout-btn" bindtap="handleLogout">退出登录</button>
     </view>
   </view>
-</scroll-view>
+</view>

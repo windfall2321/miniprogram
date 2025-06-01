@@ -60,3 +60,251 @@ page {
 .nickname-input {
   flex: 1;
 }
+
+.container {
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.welcome {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.logout-btn {
+  background-color: #ff4d4f;
+  color: #fff;
+  font-size: 28rpx;
+  padding: 10rpx 30rpx;
+  border-radius: 30rpx;
+  border: none;
+}
+
+.content {
+  padding: 20rpx;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+  padding-bottom: 20rpx;
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.label {
+  color: #666;
+  width: 160rpx;
+}
+
+.value {
+  color: #333;
+  flex: 1;
+}
+
+.page-container {
+  min-height: 100vh;
+  background-color: #f7f8fa;
+  padding: 20rpx;
+}
+
+/* 用户卡片样式 */
+.user-card {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx;
+  color: white;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.user-detail {
+  margin-left: 30rpx;
+}
+
+.username {
+  font-size: 36rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.welcome-text {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.logout-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 28rpx;
+  padding: 15rpx 40rpx;
+  border-radius: 30rpx;
+  border: none;
+  width: auto;
+  display: inline-block;
+}
+
+/* 内容区域样式 */
+.content {
+  padding: 0 10rpx;
+}
+
+/* 信息卡片样式 */
+.info-card {
+  background-color: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  margin-bottom: 30rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+}
+
+.card-subtitle {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 6rpx;
+  display: block;
+}
+
+.info-list {
+  border-top: 2rpx solid #f5f5f5;
+  padding-top: 20rpx;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  display: flex;
+  align-items: center;
+  color: #666;
+  font-size: 28rpx;
+}
+
+.icon {
+  margin-right: 10rpx;
+  font-size: 32rpx;
+}
+
+.info-value {
+  color: #333;
+  font-size: 28rpx;
+}
+
+/* 快捷功能区域样式 */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.action-item {
+  background-color: white;
+  border-radius: 16rpx;
+  padding: 30rpx 20rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.action-icon {
+  font-size: 48rpx;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.action-text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 修改顶部按钮样式 */
+.edit-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 28rpx;
+  padding: 15rpx 40rpx;
+  border-radius: 30rpx;
+  border: none;
+  width: auto;
+  display: inline-block;
+}
+
+/* 添加退出登录按钮样式 */
+.logout-section {
+  margin-top: 40rpx;
+  padding: 0 20rpx;
+}
+
+.logout-btn {
+  width: 100%;
+  background-color: #ff4d4f;
+  color: white;
+  font-size: 32rpx;
+  padding: 24rpx 0;
+  border-radius: 16rpx;
+  border: none;
+  box-shadow: 0 4rpx 10rpx rgba(255, 77, 79, 0.2);
+}
+
+.logout-btn:active {
+  opacity: 0.8;
+}

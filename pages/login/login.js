@@ -41,8 +41,8 @@ Page({
           icon: 'success'
         });
 
-        // 登录成功后跳转到首页
-        wx.switchTab({
+        // 修改这里：使用 redirectTo 而不是 switchTab
+        wx.redirectTo({
           url: '/pages/index/index'
         });
       })

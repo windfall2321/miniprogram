@@ -1,24 +1,40 @@
-<view class="container">
+<view class="login-container">
   <view class="login-box">
-    <view class="title">登录</view>
-    <view class="input-group">
-      <input 
-        class="input" 
-        placeholder="请输入用户名" 
-        bindinput="onUsernameInput"
-        value="{{username}}"
-      />
-      <input 
-        class="input" 
-        placeholder="请输入密码" 
-        password 
-        bindinput="onPasswordInput"
-        value="{{password}}"
-      />
+    <!-- 顶部标题 -->
+    <view class="header">
+      <text class="title">欢迎登录</text>
+      <text class="subtitle">Welcome Back</text>
     </view>
+
+    <!-- 登录表单 -->
+    <view class="form-group">
+      <view class="input-group">
+        <text class="input-icon">👤</text>
+        <input 
+          class="input" 
+          placeholder="请输入用户名" 
+          placeholder-class="placeholder"
+          bindinput="onUsernameInput"
+          value="{{username}}"
+        />
+      </view>
+      <view class="input-group">
+        <text class="input-icon">🔒</text>
+        <input 
+          class="input" 
+          placeholder="请输入密码" 
+          placeholder-class="placeholder"
+          password 
+          bindinput="onPasswordInput"
+          value="{{password}}"
+        />
+      </view>
+    </view>
+
+    <!-- 按钮组 -->
     <view class="btn-group">
-      <button class="btn login-btn" bindtap="handleLogin">登录</button>
-      <button class="btn register-btn" bindtap="goToRegister">注册账号</button>
+      <button class="login-btn" bindtap="handleLogin">登录</button>
+      <button class="register-btn" bindtap="goToRegister">注册账号</button>
     </view>
   </view>
 </view> 

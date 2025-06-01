@@ -1,17 +1,85 @@
 // index.js
 const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
+const userService = require('../../utils/userService');
 
 Page({
   data: {
     motto: 'Hello World',
-    userInfo: {
-      avatarUrl: defaultAvatarUrl,
-      nickName: '',
-    },
+    userInfo: null,
     hasUserInfo: false,
     canIUseGetUserProfile: wx.canIUse('getUserProfile'),
     canIUseNicknameComp: wx.canIUse('input.type.nickname'),
   },
+
+  onLoad() {
+    this.loadUserInfo();
+  },
+
+  onShow() {
+    // 每次显示页面时重新加载用户信息
+    this.loadUserInfo();
+  },
+
+  async loadUserInfo() {
+    try {
+      wx.showLoading({
+        title: '加载中...'
+      });
+
+      const response = await userService.getUserInfo();
+      if (response.code === 200) {
+        this.setData({
+          userInfo: response.data
+        });
+      }
+
+      wx.hideLoading();
+    } catch (error) {
+      wx.hideLoading();
+      console.error('获取用户信息失败:', error);
+      wx.showToast({
+        title: '获取用户信息失败',
+        icon: 'none'
+      });
+    }
+  },
+
+  handleEditProfile() {
+    // 处理编辑资料
+    wx.showToast({
+      title: '功能开发中',
+      icon: 'none'
+    });
+  },
+
+  async handleLogout() {
+    try {
+      wx.showLoading({
+        title: '退出中...'
+      });
+
+      await userService.logout();
+      
+      wx.hideLoading();
+      wx.showToast({
+        title: '退出成功',
+        icon: 'success'
+      });
+
+      // 退出后跳转到登录页
+      wx.redirectTo({
+        url: '/pages/login/login'
+      });
+    } catch (error) {
+      wx.hideLoading();
+      console.error('退出失败:', error);
+      wx.showToast({
+        title: '退出失败',
+        icon: 'none'
+      });
+    }
+  },
+
   bindViewTap() {
     wx.navigateTo({
       url: '../logs/logs'
@@ -46,4 +114,12 @@ Page({
       }
     })
   },
+  handleAction(e) {
+    const { type } = e.currentTarget.dataset;
+    // 处理快捷功能点击
+    wx.showToast({
+      title: '功能开发中',
+      icon: 'none'
+    });
+  }
 })
