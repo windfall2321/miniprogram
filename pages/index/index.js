@@ -16,8 +16,17 @@ Page({
   },
 
   onShow() {
-    // 每次显示页面时重新加载用户信息
-    this.loadUserInfo();
+    // 每次显示页面时检查是否需要刷新
+    const app = getApp();
+    if (app.globalData && app.globalData.needRefresh) {
+      console.log('检测到需要刷新用户信息');
+      this.loadUserInfo();
+      // 重置刷新标志
+      app.globalData.needRefresh = false;
+    } else {
+      console.log('个人主页显示，重新加载用户信息');
+      this.loadUserInfo();
+    }
   },
 
   async loadUserInfo() {
@@ -28,9 +37,12 @@ Page({
 
       const response = await userService.getUserInfo();
       if (response.code === 200) {
+        console.log('获取到的用户信息:', response.data);
         this.setData({
           userInfo: response.data
         });
+      } else {
+        throw new Error(response.message || '获取用户信息失败');
       }
 
       wx.hideLoading();
@@ -45,10 +57,8 @@ Page({
   },
 
   handleEditProfile() {
-    // 处理编辑资料
-    wx.showToast({
-      title: '功能开发中',
-      icon: 'none'
+    wx.navigateTo({
+      url: '/pages/edit-profile/edit-profile'
     });
   },
 
@@ -121,5 +131,14 @@ Page({
       title: '功能开发中',
       icon: 'none'
     });
-  }
+  },
+  // 预览头像
+  previewAvatar() {
+    if (this.data.userInfo && this.data.userInfo.profile) {
+      wx.previewImage({
+        urls: [this.data.userInfo.profile],
+        current: this.data.userInfo.profile
+      });
+    }
+  },
 })
