@@ -1,4 +1,6 @@
 // app.js
+const config = require('./utils/config');
+
 App({
   onLaunch() {
     // 检查登录状态
@@ -22,8 +24,17 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
+
+    // 初始化全局数据
+    this.globalData = {
+      userInfo: null,
+      needRefresh: false,
+      config: config
+    };
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    needRefresh: false,
+    config: null
   }
 })

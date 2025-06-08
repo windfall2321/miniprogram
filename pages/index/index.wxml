@@ -3,7 +3,7 @@
   <!-- 顶部用户信息卡片 -->
   <view class="user-card">
     <view class="user-info">
-      <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <image class="avatar" src="{{userInfo.profile || '/images/default-avatar.png'}}" mode="aspectFill" bindtap="previewAvatar"></image>
       <view class="user-detail">
         <text class="username">{{userInfo.username}}</text>
         <text class="welcome-text">欢迎回来</text>
@@ -15,28 +15,7 @@
   <!-- 功能卡片区域 -->
   <view class="content">
     <!-- 用户信息卡片 -->
-    <view class="info-card">
-      <view class="card-header">
-        <text class="card-title">个人信息</text>
-        <text class="card-subtitle">User Information</text>
-      </view>
-      <view class="info-list">
-        <view class="info-item">
-          <view class="info-label">
-            <text class="icon">👤</text>
-            <text>用户名</text>
-          </view>
-          <text class="info-value">{{userInfo.username}}</text>
-        </view>
-        <view class="info-item">
-          <view class="info-label">
-            <text class="icon">📅</text>
-            <text>注册时间</text>
-          </view>
-          <text class="info-value">{{userInfo.createTime}}</text>
-        </view>
-      </view>
-    </view>
+
 
     <!-- 退出登录按钮 -->
     <view class="logout-section">
