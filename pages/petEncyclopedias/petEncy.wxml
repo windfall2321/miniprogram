@@ -1,0 +1,421 @@
+<!-- petEncy.wxml -->
+<view class="pet-encyclopedia-container">
+  <!-- 页面头部 -->
+  <view class="page-header">
+    <view class="page-title">
+      <text class="paw-icon">🐾</text>
+      <text class="title">宠物百科</text>
+    </view>
+    <button class="add-button" bindtap="showAddModal">
+      <text class="add-icon">+</text>
+      <text>添加宠物信息</text>
+    </button>
+  </view>
+
+  <!-- 搜索和筛选区域 -->
+  <view class="search-filter">
+    <view class="search-input">
+      <text class="search-icon">🔍</text>
+      <input
+        type="text"
+        value="{{searchKeyword}}"
+        placeholder="搜索品种名称..."
+        bindinput="handleSearch"
+      />
+    </view>
+    <view class="filter-dropdown">
+      <picker 
+        mode="selector" 
+        range="{{categoryOptions}}" 
+        value="{{categoryIndex}}" 
+        bindchange="handleFilterChange"
+      >
+        <view class="picker-text">
+          {{categoryOptions[categoryIndex]}}
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 宠物列表 -->
+  <view class="pet-list" wx:if="{{!loading && pets.length > 0}}">
+    <view 
+      class="pet-card pet-card--{{item.category}}" 
+      wx:for="{{displayedPets}}" 
+      wx:key="pet_ency_id"
+      wx:for-index="idx"
+    >
+      <view class="pet-header">
+        <text class="pet-name">{{item.variety_name}}</text>
+        <view class="category-badge">{{item.category}}</view>
+        <view class="pet-actions">
+          <button class="edit-button" bindtap="editPet" data-pet="{{item}}">
+            <text class="action-icon">✏️</text>
+            <text>编辑</text>
+          </button>
+          <button class="delete-button" bindtap="confirmDelete" data-pet="{{item}}">
+            <text class="action-icon">🗑️</text>
+            <text>删除</text>
+          </button>
+        </view>
+      </view>
+
+      <view class="pet-content">
+        <view class="pet-image-container">
+          <image 
+            class="pet-image" 
+            src="{{item.image}}" 
+            mode="aspectFill"
+            wx:if="{{item.image}}"
+          />
+          <view class="pet-image placeholder" wx:else>
+            <view class="no-image">
+              <text wx:if="{{item.category === '猫'}}">🐱</text>
+              <text wx:elif="{{item.category === '狗'}}">🐶</text>
+              <text wx:elif="{{item.category === '鸟'}}">🦜</text>
+              <text wx:else>🐾</text>
+              <text class="no-image-text">暂无图片</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="pet-details">
+          <view class="pet-info-group">
+            <view class="detail-item">
+              <text class="label">体型:</text>
+              <text class="value">{{item.bodily_form || '未知'}}</text>
+            </view>
+            <view class="detail-item">
+              <text class="label">体重:</text>
+              <text class="value">{{item.weight || '未知'}}</text>
+            </view>
+            <view class="detail-item">
+              <text class="label">寿命:</text>
+              <text class="value">{{item.lifetime || '未知'}}</text>
+            </view>
+          </view>
+
+          <view class="collapsible-section">
+            <button class="toggle-button" bindtap="toggleDetails" data-index="{{idx}}">
+              <text class="toggle-icon">{{item.showDetails ? '▼' : '▶'}}</text>
+              <text>{{item.showDetails ? '收起详情' : '查看详情'}}</text>
+            </button>
+
+            <view class="extended-details" wx:if="{{item.showDetails}}">
+              <view class="detail-columns">
+                <view class="detail-column">
+                  <view class="detail-item">
+                    <text class="label">身高:</text>
+                    <text class="value">{{item.height || '未知'}}</text>
+                  </view>
+                  <view class="detail-item">
+                    <text class="label">尾巴特征:</text>
+                    <text class="value">{{item.feature_tail || '未知'}}</text>
+                  </view>
+                  <view class="detail-item">
+                    <text class="label">耳朵特征:</text>
+                    <text class="value">{{item.feature_ear || '未知'}}</text>
+                  </view>
+                </view>
+                <view class="detail-column">
+                  <view class="detail-item">
+                    <text class="label">眼睛特征:</text>
+                    <text class="value">{{item.feature_eye || '未知'}}</text>
+                  </view>
+                  <view class="detail-item">
+                    <text class="label">毛色:</text>
+                    <text class="value">{{item.coat_color || '未知'}}</text>
+                  </view>
+                  <view class="detail-item">
+                    <text class="label">毛长:</text>
+                    <text class="value">{{item.coat_length || '未知'}}</text>
+                  </view>
+                </view>
+              </view>
+              
+              <view class="detail-item description">
+                <text class="label-block">简介:</text>
+                <view class="description-content">
+                  <text>{{item.introduction || '暂无简介'}}</text>
+                </view>
+              </view>
+              <view class="detail-item description">
+                <text class="label-block">饲养注意事项:</text>
+                <view class="description-content">
+                  <text>{{item.feeding_matters || '暂无饲养注意事项'}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:elif="{{!loading && pets.length === 0}}">
+    <view class="empty-icon">🔍</view>
+    <text>暂无宠物信息，点击"添加宠物信息"按钮添加新的宠物百科。</text>
+    <button class="add-button-secondary" bindtap="showAddModal">
+      <text class="add-icon">+</text>
+      <text>添加宠物信息</text>
+    </button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <view class="paw-loading">
+      <view class="loading-dot"></view>
+      <view class="loading-dot"></view>
+      <view class="loading-dot"></view>
+      <view class="loading-dot"></view>
+    </view>
+    <text>正在加载宠物信息...</text>
+  </view>
+
+  <!-- 分页 -->
+  <view class="pagination" wx:if="{{totalItems > 0}}">
+    <button
+      class="page-button"
+      disabled="{{currentPage === 1}}"
+      bindtap="changePage"
+      data-page="{{currentPage - 1}}"
+    >
+      <text class="page-arrow">◀</text>
+      <text>上一页</text>
+    </button>
+
+    <view class="page-info">
+      <text class="current-page">{{currentPage}}</text>
+      <text> / {{totalPages}}</text>
+    </view>
+
+    <button
+      class="page-button"
+      disabled="{{currentPage === totalPages}}"
+      bindtap="changePage"
+      data-page="{{currentPage + 1}}"
+    >
+      <text>下一页</text>
+      <text class="page-arrow">▶</text>
+    </button>
+
+    <view class="page-size-selector">
+      <text>每页显示:</text>
+      <picker 
+        mode="selector" 
+        range="{{pageSizeOptions}}" 
+        value="{{pageSizeIndex}}" 
+        bindchange="handlePageSizeChange"
+      >
+        <view class="page-size-text">{{pageSize}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 添加/编辑模态框 -->
+  <view class="modal" wx:if="{{showModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">{{isEditing ? '编辑宠物信息' : '添加宠物信息'}}</text>
+        <button class="close-button" bindtap="closeModal">×</button>
+      </view>
+
+      <view class="modal-body">
+        <scroll-view scroll-y="true" class="form-scroll">
+          <view class="form-grid">
+            <view class="form-group">
+              <text class="form-label">
+                <text class="required-star">*</text>品种名称
+              </text>
+              <input
+                type="text"
+                value="{{petForm.variety_name}}"
+                bindinput="onFormInput"
+                data-field="variety_name"
+                placeholder="请输入品种名称"
+              />
+            </view>
+
+            <view class="form-group">
+              <text class="form-label">
+                <text class="required-star">*</text>类别
+              </text>
+              <picker 
+                mode="selector" 
+                range="{{formCategoryOptions}}" 
+                value="{{petForm.categoryIndex}}" 
+                bindchange="onCategoryChange"
+              >
+                <view class="picker-input">
+                  {{petForm.category || '选择类别'}}
+                </view>
+              </picker>
+            </view>
+
+            <view class="form-group">
+              <text class="form-label">体型</text>
+              <input
+                type="text"
+                value="{{petForm.bodily_form}}"
+                bindinput="onFormInput"
+                data-field="bodily_form"
+                placeholder="如：小型、中型、大型"
+              />
+            </view>
+
+            <view class="form-group">
+              <text class="form-label">身高</text>
+              <input
+                type="text"
+                value="{{petForm.height}}"
+                bindinput="onFormInput"
+                data-field="height"
+                placeholder="如：20-30cm"
+              />
+            </view>
+
+            <view class="form-group">
+              <text class="form-label">体重</text>
+              <input
+                type="text"
+                value="{{petForm.weight}}"
+                bindinput="onFormInput"
+                data-field="weight"
+                placeholder="如：3-5kg"
+              />
+            </view>
+
+            <view class="form-group">
+              <text class="form-label">寿命</text>
+              <input
+                type="text"
+                value="{{petForm.lifetime}}"
+                bindinput="onFormInput"
+                data-field="lifetime"
+                placeholder="如：12-15年"
+              />
+            </view>
+
+            <view class="form-group">
+              <text class="form-label">尾巴特征</text>
+              <input
+                type="text"
+                value="{{petForm.feature_tail}}"
+                bindinput="onFormInput"
+                data-field="feature_tail"
+                placeholder="描述尾巴特征"
+              />
+            </view>
+
+            <view class="form-group">
+              <text class="form-label">耳朵特征</text>
+              <input
+                type="text"
+                value="{{petForm.feature_ear}}"
+                bindinput="onFormInput"
+                data-field="feature_ear"
+                placeholder="描述耳朵特征"
+              />
+            </view>
+
+            <view class="form-group">
+              <text class="form-label">眼睛特征</text>
+              <input
+                type="text"
+                value="{{petForm.feature_eye}}"
+                bindinput="onFormInput"
+                data-field="feature_eye"
+                placeholder="描述眼睛特征"
+              />
+            </view>
+
+            <view class="form-group">
+              <text class="form-label">毛色</text>
+              <input
+                type="text"
+                value="{{petForm.coat_color}}"
+                bindinput="onFormInput"
+                data-field="coat_color"
+                placeholder="如：黑色、白色、花色"
+              />
+            </view>
+
+            <view class="form-group">
+              <text class="form-label">毛长</text>
+              <input
+                type="text"
+                value="{{petForm.coat_length}}"
+                bindinput="onFormInput"
+                data-field="coat_length"
+                placeholder="如：短毛、长毛"
+              />
+            </view>
+
+            <view class="form-group">
+              <text class="form-label">图片URL</text>
+              <input
+                type="text"
+                value="{{petForm.image}}"
+                bindinput="onFormInput"
+                data-field="image"
+                placeholder="请输入图片链接"
+              />
+            </view>
+          </view>
+
+          <view class="form-group full-width">
+            <text class="form-label">简介</text>
+            <textarea
+              value="{{petForm.introduction}}"
+              bindinput="onFormInput"
+              data-field="introduction"
+              placeholder="请输入宠物简介"
+              maxlength="500"
+            ></textarea>
+          </view>
+
+          <view class="form-group full-width">
+            <text class="form-label">饲养注意事项</text>
+            <textarea
+              value="{{petForm.feeding_matters}}"
+              bindinput="onFormInput"
+              data-field="feeding_matters"
+              placeholder="请输入饲养注意事项"
+              maxlength="500"
+            ></textarea>
+          </view>
+
+          <view class="form-actions">
+            <button class="cancel-button" bindtap="closeModal">取消</button>
+            <button class="submit-button" bindtap="submitForm">
+              {{isEditing ? '保存修改' : '添加宠物'}}
+            </button>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 删除确认模态框 -->
+  <view class="modal" wx:if="{{showDeleteModal}}">
+    <view class="modal-content delete-confirm">
+      <view class="modal-header">
+        <text class="modal-title">确认删除</text>
+        <button class="close-button" bindtap="cancelDelete">×</button>
+      </view>
+
+      <view class="modal-body">
+        <view class="delete-warning">
+          <text class="warning-icon">⚠️</text>
+        </view>
+        <text>确定要删除 <text class="highlight">{{petToDelete.variety_name}}</text> 的信息吗？此操作不可撤销。</text>
+
+        <view class="form-actions">
+          <button class="cancel-button" bindtap="cancelDelete">取消</button>
+          <button class="delete-confirm-button" bindtap="deletePet">确认删除</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

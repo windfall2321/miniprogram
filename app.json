@@ -4,7 +4,8 @@
     "pages/login/login",
     "pages/register/register",
     "pages/edit-profile/edit-profile",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/petEncyclopedias/petEncy"
   ],
   "window": {
     "navigationBarTextStyle": "black",
