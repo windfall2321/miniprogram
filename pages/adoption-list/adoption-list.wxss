@@ -6,60 +6,81 @@ page {
 }
 
 .card {
-  background-color: #fff;
-  border-radius: 16rpx;
-  box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.1);
-  margin: 20rpx auto;
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
+  margin: 24rpx auto;
   width: 700rpx;
-  height: 420rpx;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-4rpx);
+  box-shadow: 0 12rpx 24rpx rgba(0, 0, 0, 0.12);
 }
 
 .card-img {
   width: 100%;
-  height: 220rpx;
+  height: 240rpx;
   object-fit: cover;
+  border-bottom-left-radius: 16rpx;
+  border-bottom-right-radius: 16rpx;
 }
 
 .card-info {
   flex: 1;
-  padding: 20rpx;
+  padding: 24rpx 28rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #fffaf3;
 }
 
 .title {
-  font-size: 32rpx;
-  font-weight: bold;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #333;
   margin-bottom: 10rpx;
+  line-height: 1.3;
 }
 
 .description {
   font-size: 26rpx;
   color: #666;
-  line-height: 1.4;
+  line-height: 1.5;
+  margin-top: 4rpx;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 .btn-area {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  gap: 20rpx;
 }
 
 .apply-btn {
-  font-size: 24rpx;
-  padding: 10rpx 20rpx;
-  border-radius: 30rpx;
-  background-color: #ffa845;
-  color: white;
-  line-height: 1;
+  font-size: 26rpx;
+  padding: 14rpx 28rpx;
+  border-radius: 32rpx;
+  font-weight: 600;
+  flex: 1;
+  text-align: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.apply-btn.detail {
+  background: linear-gradient(to right, #ffb347, #ff914d);
+  color:  #fff4da;
+}
+
+.apply-btn.request {
+  background: linear-gradient(to right, #fff4da, #ffeecb); /* 米白渐变 */
+  color: #FF914D;
 }
 
 /* 浮动按钮固定到底部右侧 */
@@ -79,7 +100,100 @@ page {
 }
 
 .plus {
-  color: white;
+  color: #fff4da;
   font-size: 60rpx;
   line-height: 1;
+}
+.modal-mask {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(6px); /* 轻微模糊背景 */
+}
+
+.modal-box {
+  position: relative;
+  width: 620rpx;
+  max-width: 90vw;
+  background: linear-gradient(135deg, #fffefc, #fff6e7);
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 20rpx 40rpx rgba(255, 168, 69, 0.25);
+  animation: fadeIn 0.3s ease forwards;
+  font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.modal-header {
+  padding: 24rpx 32rpx;
+  background: #ffb347;
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1.5rpx;
+  box-shadow: 0 4rpx 8rpx rgba(255, 180, 70, 0.4);
+}
+
+.modal-close {
+  position: absolute;
+  top: 18rpx;
+  right: 18rpx;
+  width: 52rpx;
+  height: 52rpx;
+  background: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 52rpx;
+  font-size: 34rpx;
+  color: #ff8c00;
+  cursor: pointer;
+  box-shadow: 0 2rpx 8rpx rgba(255, 140, 0, 0.3);
+  transition: all 0.3s ease;
+}
+.modal-close:hover {
+  background: #ff8c00;
+  color: #fff;
+  box-shadow: 0 0 15rpx #ff8c00;
+}
+
+.modal-image {
+  width: 100%;
+  height: 320rpx;
+  object-fit: cover;
+  border-bottom-left-radius: 24rpx;
+  border-bottom-right-radius: 24rpx;
+  box-shadow: inset 0 0 10rpx rgba(255, 180, 70, 0.2);
+}
+
+.modal-content {
+  padding: 28rpx 32rpx;
+  font-size: 30rpx;
+  color: #4a4a4a;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  line-height: 1.5;
+}
+
+.modal-content text {
+  background: #fff7e6;
+  padding: 12rpx 16rpx;
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 10rpx rgba(255, 180, 70, 0.1);
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

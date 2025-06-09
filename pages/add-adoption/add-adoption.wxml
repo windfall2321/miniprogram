@@ -1,0 +1,28 @@
+<view class="container">
+  <form bindsubmit="onSubmit">
+    <view class="form-item">
+      <text>宠物姓名</text>
+      <input name="petName" placeholder="请输入宠物姓名" />
+    </view>
+    <view class="form-item">
+      <text>宠物品种</text>
+      <input name="petBreed" placeholder="请输入宠物品种" />
+    </view>
+    <view class="form-item">
+      <text>性别</text>
+      <radio-group name="petGender">
+        <label><radio value="1" />公</label>
+        <label><radio value="0" />母</label>
+      </radio-group>
+    </view>
+    <view class="form-item">
+      <text>描述</text>
+      <textarea name="description" placeholder="请输入描述" />
+    </view>
+    <view class="form-item">
+      <text>图片URL</text>
+      <input name="petImage" placeholder="请输入图片链接" />
+    </view>
+    <button form-type="submit" class="submit-btn">提交</button>
+  </form>
+</view>

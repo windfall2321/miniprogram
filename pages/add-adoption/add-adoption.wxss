@@ -1,0 +1,62 @@
+.container {
+  padding: 32rpx;
+  background-color: #fff8e7;
+  min-height: 100vh;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(255, 168, 69, 0.15);
+  max-width: 700rpx;
+  margin: 20rpx auto;
+}
+
+.form-item {
+  margin-bottom: 32rpx;
+  font-family: 'PingFang SC', sans-serif;
+  color: #7a4a00;
+}
+
+.form-item text {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #b36e00;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+input, textarea {
+  width: 100%;
+  border: 1rpx solid #ffa845;
+  border-radius: 8rpx;
+  padding: 10rpx;
+  font-size: 28rpx;
+  background-color: #fff;
+  box-shadow: 0 2rpx 8rpx rgba(255, 168, 69, 0.3);
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #ffb84d;
+  outline: none;
+  box-shadow: 0 4rpx 12rpx rgba(255, 168, 69, 0.5);
+}
+
+textarea {
+  height: 100rpx;
+  resize: none;
+}
+
+.submit-btn {
+  background: linear-gradient(90deg, #ffa845 0%, #ffcb69 100%);
+  color: white;
+  border-radius: 30rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 6rpx 12rpx rgba(255, 168, 69, 0.6);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 3rpx 6rpx rgba(255, 168, 69, 0.4);
+}

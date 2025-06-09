@@ -1,4 +1,5 @@
-// pages/adoption-list/adoption-list.js
+const http = require('../../utils/request');
+
 Page({
   data: {
     adoptions: []
@@ -9,50 +10,57 @@ Page({
   },
 
   fetchAdoptionList() {
-    console.log('fetchAdoptionList triggered');
-    // 模拟延迟加载
-    setTimeout(() => {
-      const mockData = [
-        {
-          adoptionId: 1,
-          listedBy: 101,
-          description: "一只可爱的金毛，性格温顺，喜欢跑步。",
-          status: "待领养",
-          listedAt: "2024-06-01T10:00:00",
-          image: "/assets/mock/pet1.jpg",
-          petName: "豆豆",
-          petBreed: "金毛寻回犬",
-          petGender: 1
-        },
-        {
-          adoptionId: 2,
-          listedBy: 102,
-          description: "活泼的小猫咪，适合家庭养。",
-          status: "待领养",
-          listedAt: "2024-06-02T14:30:00",
-          image: "/assets/mock/pet2.jpg",
-          petName: "小橘",
-          petBreed: "橘猫",
-          petGender: 0
-        }
-      ];
-  
+    http.get('/adoption-listings/get').then((res) => {
+      console.log('后端响应:', res);
+
+      const list = res.data.map(item => ({
+        ...item,
+        image: item.petImage || '/assets/default-avatar.jpg'  // 用 petImage 替代原 image
+      }));
+
       this.setData({
-        adoptions: mockData
+        adoptions: list
       });
-    }, 300); // 模拟网络延迟 300ms
+    }).catch(err => {
+      console.error('加载失败:', err);
+    });
   },
 
   apply(e) {
     const id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: `/pages/adoption-detail/adoption-detail?adoptionId=${id}`
-    });
+    const pet = this.data.adoptions.find(item => item.adoptionId === id);
+  
+    if (pet) {
+      this.setData({
+        selectedPet: pet,
+        showModal: true
+      });
+    }
   },
 
+  closeModal() {
+    this.setData({
+      showModal: false
+    });
+  },
+  submitApplication(e) {
+    const id = e.currentTarget.dataset.id;
+    const pet = this.data.adoptions.find(item => item.adoptionId === id);
+  
+    if (pet) {
+      wx.showToast({
+        title: `已申请 ${pet.petName}`,
+        icon: 'success',
+        duration: 2000
+      });
+  
+      // 你可以在这里补充实际的申请逻辑，比如发送 POST 请求等
+    }
+  },
+  
   goToAddAdoption() {
     wx.navigateTo({
-      url: '/pages/add-adoption/add-adoption' 
+      url: '/pages/add-adoption/add-adoption'
     });
   }
 });
