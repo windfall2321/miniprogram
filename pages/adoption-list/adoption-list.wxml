@@ -1,0 +1,19 @@
+<view class="container">
+  <block wx:for="{{adoptions}}" wx:key="adoptionId">
+    <view class="card">
+      <image class="card-img" src="{{item.image}}" mode="aspectFill" />
+      <view class="card-info">
+        <text class="title">{{item.petName}}</text>
+        <text class="description">{{item.description}}</text>
+        <view class="btn-area">
+          <button class="apply-btn" bindtap="apply" data-id="{{item.adoptionId}}">申请</button>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 浮动添加按钮 -->
+  <view class="floating-btn" bindtap="goToAddAdoption">
+    <text class="plus">＋</text>
+  </view>
+</view>
