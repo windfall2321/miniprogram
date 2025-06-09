@@ -1,0 +1,46 @@
+/* pages/allTopics/allTopics.wxss */
+.topic-list {
+  padding: 20rpx;
+}
+
+.topic-card {
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 30rpx;
+  padding: 24rpx;
+  box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.topic-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.topic-title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.topic-user {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.topic-content {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.topic-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.topic-img {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 8rpx;
+}

@@ -5,7 +5,8 @@
     "pages/register/register",
     "pages/edit-profile/edit-profile",
     "pages/logs/logs",
-    "pages/adoption-list/adoption-list"
+    "pages/adoption-list/adoption-list",
+    "pages/allTopics/allTopics"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -18,7 +19,12 @@
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
     "list": [
-      
+      {
+        "pagePath": "pages/allTopics/allTopics",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "交流"
+      },
       {
         "pagePath": "pages/adoption-list/adoption-list",
         "iconPath": "",
