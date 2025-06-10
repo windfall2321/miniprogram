@@ -15,12 +15,22 @@ function processImageUrl(url) {
 const userService = {
   // 用户注册
   register: async function(userData) {
-    return http.post('/user/register', userData);
+    const response = await http.post('/user/register', userData);
+    if (response.code === 200 && response.data) {
+      // 保存token
+      wx.setStorageSync('token', response.data.token);
+      return response;
+    } else {
+      throw new Error(response.message || '注册失败');
+    }
   },
 
   // 用户登录
   login: async function(username, password) {
-    const response = await http.post(`/user/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
+    const response = await http.post('/user/login', {
+      username: username,
+      password: password
+    });
     // 从响应中获取token
     if (response.code === 200 && response.data) {
       // 保存token

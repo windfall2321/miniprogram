@@ -49,9 +49,9 @@ Page({
         title: '注册中...'
       });
 
-      await userService.register({
-        username,
-        password
+      const response = await userService.register({
+        username: username,
+        password: password
       });
       
       wx.hideLoading();
@@ -60,13 +60,19 @@ Page({
         icon: 'success'
       });
 
-      // 注册成功后跳转到登录页
+      // 注册成功后直接跳转到首页
       setTimeout(() => {
-        wx.navigateBack();
+        wx.redirectTo({
+          url: '/pages/index/index'
+        });
       }, 1500);
     } catch (error) {
       wx.hideLoading();
       console.error('注册失败:', error);
+      wx.showToast({
+        title: error.message || '注册失败',
+        icon: 'none'
+      });
     }
   },
 
