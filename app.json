@@ -6,7 +6,7 @@
     "pages/edit-profile/edit-profile",
     "pages/logs/logs",
     "pages/adoption-list/adoption-list",
-    "pages/add-adoption/add-adoption"
+    "pages/add-adoption/add-adoption",
     "pages/petEncyclopedias/petEncy"
   ],
   "window": {
