@@ -134,12 +134,44 @@ Page({
     this.setData({ loading: true })
     try {
       const res = await http.get('/adoption-applications/getbyuserid')
+      console.log('获取到的申请列表原始数据:', res)
+      
       if (res.code === 200) {
         // 过滤出我的申请（即我申请其他人的领养）
         const myApplications = res.data.filter(app =>
           !this.data.myListings.some(listing => listing.adoptionId === app.adoptionId)
         )
-        this.setData({ myApplications })
+        console.log('过滤后的申请列表:', myApplications)
+        
+        // 为每个申请获取宠物信息
+        const applicationsWithPetInfo = []
+        for (const app of myApplications) {
+          try {
+            console.log('正在获取申请ID:', app.adoptionApplicationId, '的宠物信息')
+            const listingRes = await http.get('/adoption-listings/get', {
+              id: app.adoptionId
+            })
+            console.log('获取到的宠物信息:', listingRes)
+            
+            if (listingRes.code === 200 && listingRes.data) {
+              const appWithInfo = {
+                ...app,
+                petName: listingRes.data.petName,
+                petType: listingRes.data.petBreed,
+                petImage: listingRes.data.petImage
+              }
+              console.log('处理后的申请信息:', appWithInfo)
+              applicationsWithPetInfo.push(appWithInfo)
+            }
+          } catch (error) {
+            console.error('获取宠物信息失败:', error)
+            // 如果获取宠物信息失败，仍然保留申请信息
+            applicationsWithPetInfo.push(app)
+          }
+        }
+        
+        console.log('最终设置的申请列表:', applicationsWithPetInfo)
+        this.setData({ myApplications: applicationsWithPetInfo })
       } else {
         wx.showToast({
           title: res.message || '获取申请失败',
@@ -269,9 +301,10 @@ Page({
     const statusMap = {
       'pending': '待审核',
       'approved': '已通过',
-      'rejected': '已拒绝'
+      'rejected': '已拒绝',
+      'cancelled': '已取消'
     }
-    return statusMap[status] || status
+    return statusMap[status] || '未知状态'
   },
 
   // 获取申请状态类型
@@ -279,7 +312,8 @@ Page({
     const typeMap = {
       'pending': 'warning',
       'approved': 'success',
-      'rejected': 'danger'
+      'rejected': 'error',
+      'cancelled': 'info'
     }
     return typeMap[status] || 'info'
   },

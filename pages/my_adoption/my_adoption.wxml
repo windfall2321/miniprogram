@@ -102,13 +102,6 @@
               <text class="description-label">申请理由:</text>
               <text>{{item.reason}}</text>
             </view>
-            <view class="details">
-              <view class="detail-item">
-                <text class="icon">🕒</text>
-                <text class="label">时间</text>
-                <text>{{formatDate(item.listedAt)}}</text>
-              </view>
-            </view>
             <view class="btn-area" wx:if="{{item.status === 'pending'}}">
               <button class="apply-btn approve" 
                       data-id="{{item.adoptionApplicationId}}"
@@ -139,16 +132,14 @@
           <view class="card-info">
             <view class="card-header">
               <text class="title">{{item.petName}}</text>
-              <text class="status-tag {{getApplicationStatusType(item.status)}}">
-                {{getApplicationStatusText(item.status)}}
+              <text class="status-tag {{statusUtils.getStatusType(item.status)}}">
+                {{statusUtils.getStatusText(item.status)}}
               </text>
             </view>
             <text class="type">{{item.petType}}</text>
             <view class="description">
               <text class="description-label">申请理由:</text>
               <text>{{item.reason}}</text>
-            </view>
-            <view class="details">
             </view>
             <view class="btn-area" wx:if="{{item.status === 'pending'}}">
               <button class="apply-btn cancel" 
@@ -166,4 +157,31 @@
       </view>
     </block>
   </view>
-</view> 
+</view>
+
+<wxs module="statusUtils">
+  function getStatusText(status) {
+    var statusMap = {
+      'pending': '待审核',
+      'approved': '已通过',
+      'rejected': '已拒绝',
+      'cancelled': '已取消'
+    }
+    return statusMap[status] || '未知状态'
+  }
+
+  function getStatusType(status) {
+    var typeMap = {
+      'pending': 'warning',
+      'approved': 'success',
+      'rejected': 'error',
+      'cancelled': 'info'
+    }
+    return typeMap[status] || 'info'
+  }
+
+  module.exports = {
+    getStatusText: getStatusText,
+    getStatusType: getStatusType
+  }
+</wxs> 

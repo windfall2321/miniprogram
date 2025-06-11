@@ -138,6 +138,13 @@ page {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16rpx;
+  height: 44rpx;
+}
+
+.card-header .status-tag {
+  margin: 0;
+  position: relative;
+  top: 0;
 }
 
 .title {
@@ -174,29 +181,29 @@ page {
 /* 状态标签 */
 .status-tag {
   font-size: 24rpx;
-  padding: 4rpx 16rpx;
-  border-radius: 24rpx;
   font-weight: 600;
+  min-width: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -2rpx;
 }
 
 .status-tag.success {
-  background: linear-gradient(to right, #fff4da, #ffeecb);
-  color: #ff914d;
+  color: #1890ff;
 }
 
 .status-tag.info {
-  background: linear-gradient(to right, #fff4da, #ffeecb);
-  color: #ff914d;
+  color: #52c41a;
 }
 
 .status-tag.warning {
-  background: linear-gradient(to right, #fff4da, #ffeecb);
-  color: #ff914d;
+  color: #fa8c16;
 }
 
 .status-tag.error {
-  background: linear-gradient(to right, #fff4da, #ffeecb);
-  color: #ff914d;
+  color: #f5222d;
 }
 
 /* 详情信息 */
@@ -216,19 +223,52 @@ page {
 .detail-item {
   display: flex;
   align-items: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #666;
   margin-right: 24rpx;
+  margin-bottom: 12rpx;
+  height: 44rpx;
 }
 
 .detail-item .icon {
-  margin-right: 8rpx;
-  font-size: 28rpx;
+  margin-right: 12rpx;
+  font-size: 32rpx;
 }
 
 .detail-item .label {
-  margin-right: 8rpx;
-  color: #999;
+  margin-right: 12rpx;
+  color: #666;
+  font-weight: 500;
+}
+
+.detail-item .status-text {
+  margin-left: 12rpx;
+  position: relative;
+  top: 0;
+}
+
+/* 申请状态文本样式 */
+.status-text {
+  font-size: 24rpx;
+  font-weight: 600;
+  min-width: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -2rpx;
+}
+
+.status-text.success {
+  color: #1890ff;
+}
+
+.status-text.warning {
+  color: #fa8c16;
+}
+
+.status-text.error {
+  color: #f5222d;
 }
 
 .listing-date {
