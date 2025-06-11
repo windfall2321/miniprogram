@@ -1,0 +1,94 @@
+<!-- 表头和搜索区域 -->
+<view class="header">
+  <view class="title">领养与救助</view>
+  <view class="search-container">
+    <!-- 添加我的领养管理按钮 -->
+    <view class="my-adoption-btn" bindtap="navigateToMyAdoption">
+      <text class="icon">📋</text>
+      <text>我的领养管理</text>
+    </view>
+    <input 
+      class="search-input" 
+      placeholder="请输入宠物名称" 
+      value="{{searchKeyword}}"
+      bindinput="onSearchInput"
+      bindconfirm="handleSearch"
+    />
+    <view class="btn-group">
+      <view class="search-btn" bindtap="handleSearch">搜索</view>
+      <view class="reset-btn" bindtap="handleReset">重置</view>
+    </view>
+  </view>
+</view>
+
+<view class="container">
+  <block wx:for="{{adoptions}}" wx:key="adoptionId">
+    <view class="card">
+      <image class="card-img" src="{{item.image}}" mode="aspectFill" />
+      <view class="card-info">
+        <view class="card-header">
+          <text class="title">{{item.petName}}</text>
+          <text class="status-tag {{item.status === 'available' ? 'success' : 'info'}}">
+            {{item.status === 'available' ? '可领养' : '已领养'}}
+          </text>
+        </view>
+        <text class="description">{{item.description}}</text>
+        <view class="btn-area">
+          <button class="apply-btn detail {{item.status !== 'available' ? 'disabled' : ''}}" 
+                  bindtap="apply" 
+                  data-id="{{item.adoptionId}}"
+                  disabled="{{item.status !== 'available'}}">详情</button>
+          <button class="apply-btn request {{item.status !== 'available' ? 'disabled' : ''}}" 
+                  bindtap="showApplicationModal" 
+                  data-id="{{item.adoptionId}}"
+                  disabled="{{item.status !== 'available'}}">申请</button>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 浮动添加按钮 -->
+  <view class="floating-btn" bindtap="goToAddAdoption">
+    <text class="plus">＋</text>
+  </view>
+</view>
+<!-- 自定义弹窗 -->
+<view wx:if="{{showModal}}" class="modal-mask">
+  <view class="modal-box">
+    <view class="modal-header">
+      <text class="modal-title">{{selectedPet.petName}}</text>
+      <text class="modal-close" bindtap="closeModal">✕</text>
+    </view>
+    <image class="modal-image" src="{{selectedPet.image}}" mode="aspectFill" />
+    <view class="modal-content">
+      <text>品种：{{selectedPet.petBreed}}</text>
+      <text>性别：{{selectedPet.petGender === 'male' ? '公' : '母'}}</text>
+      <text>城市：{{selectedPet.petCity}}</text>
+      <text>描述：{{selectedPet.description}}</text>
+      <!-- 申请弹窗特有内容 -->
+      <block wx:if="{{modalType === 'application'}}">
+        <view class="reason-input">
+          <text class="reason-label">申请理由：</text>
+          <textarea 
+            class="reason-textarea" 
+            placeholder="请输入申请理由（至少10个字）" 
+            value="{{applicationReason}}"
+            bindinput="onReasonInput"
+            maxlength="200"
+          ></textarea>
+          <text class="word-count">{{reasonLength}}/200</text>
+        </view>
+      </block>
+    </view>
+    <!-- 申请弹窗特有按钮 -->
+    <view class="modal-footer" wx:if="{{modalType === 'application'}}">
+      <button class="modal-btn cancel" bindtap="closeModal">取消</button>
+      <button class="modal-btn confirm" 
+              bindtap="submitApplication" 
+              data-id="{{selectedPet.adoptionId}}"
+              disabled="{{!applicationReason || reasonLength < 10}}">
+        提交申请
+      </button>
+    </view>
+  </view>
+</view>
