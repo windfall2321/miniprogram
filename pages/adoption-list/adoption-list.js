@@ -21,7 +21,8 @@ Page({
     selectedPet: null,
     applicationReason: '', // 申请理由
     reasonLength: 0, // 申请理由字数
-    modalType: 'detail' // 弹窗类型：detail 或 application
+    modalType: 'detail', // 弹窗类型：detail 或 application
+    defaultImage: '/assets/default-avatar.jpg' // Added for the new getPetTypeText method
   },
 
   onLoad() {
@@ -57,7 +58,8 @@ Page({
         .map(item => ({
           ...item,
           image: processImageUrl(item.petImage),  // 处理图片URL
-          petGender: item.petGender || 'male'  // 确保性别字段有默认值
+          petGender: item.petGender || 'male',  // 确保性别字段有默认值
+          petBreed: this.getPetTypeText(item.petBreed) // 转换宠物类型为中文
         }));
 
       this.setData({
@@ -262,5 +264,15 @@ Page({
         });
       }
     });
+  },
+
+  // 获取宠物类型文本
+  getPetTypeText(type) {
+    const types = {
+      'cat': '猫咪',
+      'dog': '狗狗',
+      'other': '其他'
+    }
+    return types[type] || type
   }
 });

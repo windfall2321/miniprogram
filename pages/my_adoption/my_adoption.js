@@ -61,6 +61,16 @@ Page({
     }
   },
 
+  // 获取宠物类型文本
+  getPetTypeText(type) {
+    const types = {
+      'cat': '猫咪',
+      'dog': '狗狗',
+      'other': '其他'
+    }
+    return types[type] || type
+  },
+
   // 获取我发布的领养列表
   async fetchMyListings() {
     if (!this.checkLogin()) return
@@ -72,7 +82,8 @@ Page({
         this.setData({
           myListings: res.data.map(listing => ({
             ...listing,
-            petImage: listing.petImage || this.data.defaultImage
+            petImage: listing.petImage || this.data.defaultImage,
+            petBreed: this.getPetTypeText(listing.petBreed) // 转换宠物类型为中文
           }))
         })
       } else {
@@ -109,7 +120,7 @@ Page({
           const applicationsWithPetInfo = res.data.map(app => ({
             ...app,
             petName: listing.petName,
-            petType: listing.petBreed,
+            petType: this.getPetTypeText(listing.petBreed), // 转换宠物类型为中文
             petImage: listing.petImage
           }))
           allApplications.push(...applicationsWithPetInfo)
@@ -157,7 +168,7 @@ Page({
               const appWithInfo = {
                 ...app,
                 petName: listingRes.data.petName,
-                petType: listingRes.data.petBreed,
+                petType: this.getPetTypeText(listingRes.data.petBreed), // 转换宠物类型为中文
                 petImage: listingRes.data.petImage
               }
               console.log('处理后的申请信息:', appWithInfo)
