@@ -1,0 +1,169 @@
+<!-- 页面容器 -->
+<view class="page-container">
+  <!-- 顶部标签页 -->
+  <view class="header">
+    <view class="title">我的领养管理</view>
+    <view class="tabs">
+      <view class="tab {{activeTab === 'myListings' ? 'active' : ''}}" 
+            data-tab="myListings" 
+            bindtap="handleTabChange">
+        我发布的领养
+      </view>
+      <view class="tab {{activeTab === 'receivedApplications' ? 'active' : ''}}" 
+            data-tab="receivedApplications" 
+            bindtap="handleTabChange">
+        我收到的申请
+      </view>
+      <view class="tab {{activeTab === 'myApplications' ? 'active' : ''}}" 
+            data-tab="myApplications" 
+            bindtap="handleTabChange">
+        我的申请
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载中提示 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-icon"></view>
+    <text>加载中...</text>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="container">
+    <!-- 我发布的领养列表 -->
+    <block wx:if="{{activeTab === 'myListings'}}">
+      <block wx:if="{{myListings.length > 0}}">
+        <view class="card {{item.status === 'adopted' ? 'adopted' : ''}}" 
+              wx:for="{{myListings}}" 
+              wx:key="adoptionId">
+          <image class="card-img" 
+                 src="{{item.petImage}}" 
+                 mode="aspectFill"
+                 bindtap="previewImage"
+                 data-url="{{item.petImage}}"/>
+          <view class="card-info">
+            <view class="card-header">
+              <text class="title">{{item.petName || '未命名宠物'}}</text>
+              <text class="status-tag {{item.status === 'available' ? 'success' : 'info'}}">
+                {{item.status === 'available' ? '可领养' : '已领养'}}
+              </text>
+            </view>
+            <text class="type">{{item.petBreed}}</text>
+            <text class="description">{{item.description}}</text>
+            <view class="details">
+              <view class="detail-row">
+                <view class="detail-item">
+                  <text class="icon">📍</text>
+                  <text class="label">城市</text>
+                  <text>{{item.petCity || '未知'}}</text>
+                </view>
+                <view class="detail-item">
+                  <text class="icon">👤</text>
+                  <text class="label">性别</text>
+                  <text>{{item.petGender === 1 ? '公' : '母'}}</text>
+                </view>
+              </view>
+              <view class="detail-row">
+                <view class="application-count" wx:if="{{item.applicationCount}}">
+                  <text class="badge">{{item.applicationCount}}</text>
+                  <text class="application-text">申请</text>
+                </view>
+              </view>
+            </view>
+            <view class="btn-area">
+              <button class="apply-btn delete" 
+                      data-id="{{item.adoptionId}}"
+                      bindtap="handleDeleteListing">
+                删除
+              </button>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="empty-data" wx:else>
+        <text class="icon">📝</text>
+        <text>暂无发布的领养信息</text>
+      </view>
+    </block>
+
+    <!-- 我收到的申请列表 -->
+    <block wx:if="{{activeTab === 'receivedApplications'}}">
+      <block wx:if="{{receivedApplications.length > 0}}">
+        <view class="card" wx:for="{{receivedApplications}}" wx:key="adoptionApplicationId">
+          <view class="card-info">
+            <view class="card-header">
+              <text class="title">{{item.petName}}</text>
+              <text class="status-tag {{getApplicationStatusType(item.status)}}">
+                {{getApplicationStatusText(item.status)}}
+              </text>
+            </view>
+            <text class="type">{{item.petType}}</text>
+            <view class="description">
+              <text class="description-label">申请理由:</text>
+              <text>{{item.reason}}</text>
+            </view>
+            <view class="details">
+              <view class="detail-item">
+                <text class="icon">🕒</text>
+                <text class="label">时间</text>
+                <text>{{formatDate(item.listedAt)}}</text>
+              </view>
+            </view>
+            <view class="btn-area" wx:if="{{item.status === 'pending'}}">
+              <button class="apply-btn approve" 
+                      data-id="{{item.adoptionApplicationId}}"
+                      data-status="approved"
+                      bindtap="handleApplicationStatus">
+                同意
+              </button>
+              <button class="apply-btn reject" 
+                      data-id="{{item.adoptionApplicationId}}"
+                      data-status="rejected"
+                      bindtap="handleApplicationStatus">
+                拒绝
+              </button>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="empty-data" wx:else>
+        <text class="icon">📨</text>
+        <text>暂无收到的申请</text>
+      </view>
+    </block>
+
+    <!-- 我的申请列表 -->
+    <block wx:if="{{activeTab === 'myApplications'}}">
+      <block wx:if="{{myApplications.length > 0}}">
+        <view class="card" wx:for="{{myApplications}}" wx:key="adoptionApplicationId">
+          <view class="card-info">
+            <view class="card-header">
+              <text class="title">{{item.petName}}</text>
+              <text class="status-tag {{getApplicationStatusType(item.status)}}">
+                {{getApplicationStatusText(item.status)}}
+              </text>
+            </view>
+            <text class="type">{{item.petType}}</text>
+            <view class="description">
+              <text class="description-label">申请理由:</text>
+              <text>{{item.reason}}</text>
+            </view>
+            <view class="details">
+            </view>
+            <view class="btn-area" wx:if="{{item.status === 'pending'}}">
+              <button class="apply-btn cancel" 
+                      data-id="{{item.adoptionApplicationId}}"
+                      bindtap="handleCancelApplication">
+                取消申请
+              </button>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="empty-data" wx:else>
+        <text class="icon">📋</text>
+        <text>暂无申请记录</text>
+      </view>
+    </block>
+  </view>
+</view> 

@@ -35,6 +35,18 @@ const userService = {
     if (response.code === 200 && response.data) {
       // 保存token
       wx.setStorageSync('token', response.data);
+      
+      // 获取并保存用户信息
+      try {
+        const userInfoRes = await this.getUserInfo();
+        if (userInfoRes.code === 200 && userInfoRes.data) {
+          wx.setStorageSync('userInfo', userInfoRes.data);
+        }
+      } catch (error) {
+        console.error('获取用户信息失败:', error);
+        // 即使获取用户信息失败，也不影响登录流程
+      }
+      
       return response;
     } else {
       throw new Error(response.message || '登录失败');

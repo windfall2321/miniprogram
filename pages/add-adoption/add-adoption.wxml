@@ -1,28 +1,108 @@
 <view class="container">
-  <form bindsubmit="onSubmit">
-    <view class="form-item">
-      <text>宠物姓名</text>
-      <input name="petName" placeholder="请输入宠物姓名" />
+  <view class="header">
+    <view class="title">发布领养</view>
+  </view>
+
+  <form bindsubmit="onSubmit" class="form-container">
+    <view class="form-group">
+      <view class="form-item">
+        <text class="label required">宠物姓名</text>
+        <input 
+          name="petName" 
+          placeholder="请输入宠物姓名" 
+          value="{{formData.petName}}"
+          bindinput="onInputChange"
+          data-field="petName"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label required">宠物类型</text>
+        <picker 
+          name="petType" 
+          mode="selector" 
+          range="{{petTypes}}" 
+          range-key="label"
+          value="{{petTypeIndex}}"
+          bindchange="onPetTypeChange"
+        >
+          <view class="picker {{formData.petType ? '' : 'placeholder'}}">
+            {{formData.petType ? petTypes[petTypeIndex].label : '请选择宠物类型'}}
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label required">宠物品种</text>
+        <input 
+          name="petBreed" 
+          placeholder="请输入宠物品种" 
+          value="{{formData.petBreed}}"
+          bindinput="onInputChange"
+          data-field="petBreed"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label required">性别</text>
+        <radio-group name="petGender" bindchange="onGenderChange" class="radio-group">
+          <label class="radio-label">
+            <radio value="male" checked="{{formData.petGender === 'male'}}" color="#ff914d" />
+            <text>公</text>
+          </label>
+          <label class="radio-label">
+            <radio value="female" checked="{{formData.petGender === 'female'}}" color="#ff914d" />
+            <text>母</text>
+          </label>
+        </radio-group>
+      </view>
+
+      <view class="form-item">
+        <text class="label required">所在城市</text>
+        <input 
+          name="petCity" 
+          placeholder="请输入所在城市" 
+          value="{{formData.petCity}}"
+          bindinput="onInputChange"
+          data-field="petCity"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label required">详细描述</text>
+        <textarea 
+          name="description" 
+          placeholder="请详细描述宠物的特点、性格、健康状况等信息" 
+          value="{{formData.description}}"
+          bindinput="onInputChange"
+          data-field="description"
+          maxlength="500"
+          class="textarea"
+        />
+        <view class="word-count">{{formData.description.length || 0}}/500</view>
+      </view>
+
+      <view class="form-item">
+        <text class="label required">上传图片</text>
+        <view class="upload-container">
+          <view class="image-preview" wx:if="{{formData.petImage}}">
+            <image src="{{formData.petImage}}" mode="aspectFill" />
+            <view class="delete-btn" bindtap="deleteImage">×</view>
+          </view>
+          <view class="upload-btn" bindtap="chooseImage" wx:else>
+            <text class="upload-icon">+</text>
+            <text class="upload-text">上传图片</text>
+          </view>
+        </view>
+      </view>
     </view>
-    <view class="form-item">
-      <text>宠物品种</text>
-      <input name="petBreed" placeholder="请输入宠物品种" />
+
+    <view class="submit-area">
+      <button 
+        form-type="submit" 
+        class="submit-btn"
+        loading="{{submitting}}"
+      >发布领养</button>
     </view>
-    <view class="form-item">
-      <text>性别</text>
-      <radio-group name="petGender">
-        <label><radio value="1" />公</label>
-        <label><radio value="0" />母</label>
-      </radio-group>
-    </view>
-    <view class="form-item">
-      <text>描述</text>
-      <textarea name="description" placeholder="请输入描述" />
-    </view>
-    <view class="form-item">
-      <text>图片URL</text>
-      <input name="petImage" placeholder="请输入图片链接" />
-    </view>
-    <button form-type="submit" class="submit-btn">提交</button>
   </form>
 </view>
