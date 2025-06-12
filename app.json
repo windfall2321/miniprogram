@@ -7,7 +7,7 @@
     "pages/logs/logs",
     "pages/adoption-list/adoption-list",
 
-    "pages/allTopics/allTopics"
+    "pages/allTopics/allTopics",
     "pages/add-adoption/add-adoption",
     "pages/petEncyclopedias/petEncy",
     "pages/my_adoption/my_adoption"
@@ -25,7 +25,8 @@
     "borderStyle": "black",
     "list": [
 
-     {
+     
+      {
         "pagePath": "pages/allTopics/allTopics",
         "iconPath": "",
         "selectedIconPath": "",
