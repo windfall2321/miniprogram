@@ -1,13 +1,23 @@
 const BASE_URL = 'http://localhost:8080/pet/api'; // 开发环境API地址
 
 const request = (url, options = {}) => {
-  console.log('请求URL:', `${BASE_URL}${url}`);
+  let finalUrl = url;
+  // 处理params参数
+  if (options.params) {
+    const queryString = Object.entries(options.params)
+      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+      .join('&');
+    finalUrl = `${url}${url.includes('?') ? '&' : '?'}${queryString}`;
+    delete options.params;
+  }
+
+  console.log('请求URL:', `${BASE_URL}${finalUrl}`);
   console.log('请求参数:', options);
 
   return new Promise((resolve, reject) => {
     const token = wx.getStorageSync('token');
     wx.request({
-      url: `${BASE_URL}${url}`,
+      url: `${BASE_URL}${finalUrl}`,
       ...options,
       header: {
         'content-type': 'application/json',
@@ -57,9 +67,16 @@ const request = (url, options = {}) => {
 
 const http = {
   get: (url, data) => request(url, { method: 'GET', data }),
-  post: (url, data) => request(url, { method: 'POST', data }),
+  post: (url, data, options = {}) => request(url, { method: 'POST', data, ...options }),
   put: (url, data) => request(url, { method: 'PUT', data }),
-  delete: (url, data) => request(url, { method: 'DELETE', data })
+  patch: (url, data) => request(url, { 
+    method: 'PATCH', 
+    params: data  // 将 data 作为 URL 参数传递，与 web 端保持一致
+  }),
+  delete: (url, data) => request(url, { 
+    method: 'DELETE', 
+    params: data  // 将 data 作为 URL 参数传递
+  })
 };
 
 module.exports = http; 

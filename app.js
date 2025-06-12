@@ -4,14 +4,14 @@ const config = require('./utils/config');
 App({
   onLaunch() {
     // 检查登录状态
-    const token = wx.getStorageSync('data');
-    if (token) {
-      // 如果有token，跳转到首页
-      wx.switchTab({
-        url: '/pages/index/index'
+    const token = wx.getStorageSync('token');
+    if (!token) {
+      // 如果没有token，跳转到登录页
+      wx.redirectTo({
+        url: '/pages/login/login'
       });
+      return;
     }
-    // 如果没有token，保持在登录页面
 
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
