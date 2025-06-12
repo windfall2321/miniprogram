@@ -6,9 +6,12 @@
     "pages/edit-profile/edit-profile",
     "pages/logs/logs",
     "pages/adoption-list/adoption-list",
+
+    "pages/allTopics/allTopics",
     "pages/add-adoption/add-adoption",
     "pages/petEncyclopedias/petEncy",
     "pages/my_adoption/my_adoption"
+
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -21,6 +24,15 @@
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
     "list": [
+
+     
+      {
+        "pagePath": "pages/allTopics/allTopics",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "交流"
+      },
+
       {
         "pagePath": "pages/adoption-list/adoption-list",
         "iconPath": "",
