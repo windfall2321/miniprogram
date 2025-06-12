@@ -15,16 +15,38 @@ function processImageUrl(url) {
 const userService = {
   // 用户注册
   register: async function(userData) {
-    return http.post('/user/register', userData);
+    const response = await http.post('/user/register', userData);
+    if (response.code === 200 && response.data) {
+      // 保存token
+      wx.setStorageSync('token', response.data.token);
+      return response;
+    } else {
+      throw new Error(response.message || '注册失败');
+    }
   },
 
   // 用户登录
   login: async function(username, password) {
-    const response = await http.post(`/user/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
+    const response = await http.post('/user/login', {
+      username: username,
+      password: password
+    });
     // 从响应中获取token
     if (response.code === 200 && response.data) {
       // 保存token
       wx.setStorageSync('token', response.data);
+      
+      // 获取并保存用户信息
+      try {
+        const userInfoRes = await this.getUserInfo();
+        if (userInfoRes.code === 200 && userInfoRes.data) {
+          wx.setStorageSync('userInfo', userInfoRes.data);
+        }
+      } catch (error) {
+        console.error('获取用户信息失败:', error);
+        // 即使获取用户信息失败，也不影响登录流程
+      }
+      
       return response;
     } else {
       throw new Error(response.message || '登录失败');
