@@ -1,0 +1,55 @@
+<view class="container">
+  <block wx:if="{{loading}}">
+    <text>加载中...</text>
+  </block>
+
+  <block wx:else>
+    <!-- 帖子部分 -->
+    <view class="topic-section">
+      <view class="image-list" wx:if="{{topic.images.length > 0}}">
+        <image
+          wx:for="{{topic.images}}"
+          wx:key="index"
+          mode="aspectFill"
+          src="{{item}}"
+          class="topic-image"
+        />
+      </view>
+      <text class="topic-title">{{topic.title}}</text>
+      <text class="topic-content">{{topic.content}}</text>
+    </view>
+
+    <!-- 评论标题 -->
+    <view class="comment-header">
+      <view class="comment-tag">评论</view>
+    </view>
+
+    <!-- 评论列表 -->
+    <view class="comment-section">
+      <block wx:if="{{comments.length === 0}}">
+        <text>暂无评论</text>
+      </block>
+      <block wx:for="{{comments}}" wx:key="id">
+        <view class="comment">
+          <view class="comment-main">
+            <text class="comment-content">{{item.content}}</text>
+
+            <view class="image-list" wx:if="{{item.images.length > 0}}">
+              <image
+                wx:for="{{item.images}}"
+                wx:key="index"
+                mode="aspectFill"
+                src="{{item}}"
+                class="comment-image"
+              />
+            </view>
+          </view>
+
+          <view class="comment-footer">
+            <text class="comment-user">用户：{{item.userId}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+</view>
