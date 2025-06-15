@@ -1,0 +1,112 @@
+/* 页面容器整体白底 */
+.container {
+  background-color: #ffffff;
+  padding: 20rpx;
+  /* min-height: 100vh; */
+}
+
+/* 帖子部分无边框，放大字体 */
+.topic-section {
+  margin-bottom: 5rpx;
+}
+
+.topic-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #222;
+  margin-top: 20rpx;
+  margin-bottom: 16rpx;
+  line-height: 48rpx;
+  display: block;              
+}
+
+.topic-content {
+  font-size: 30rpx;
+  color: #444;
+  line-height: 44rpx;
+  margin-bottom: 5rpx;
+  display: block;          
+}
+
+/* 帖子图片放内容上面，统一样式 */
+.topic-section .image-list {
+  margin-bottom: 20rpx;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.topic-image {
+  width: 100%;
+  max-height: 300rpx;
+  border-radius: 12rpx;
+  object-fit: cover;
+}
+
+/* 评论标题栏，文字靠右，背景白色，无边框 */
+.comment-header {
+  display: flex;
+  justify-content: flex-end;  /* 靠右 */
+  width: 100%;                /* 确保撑满整行 */
+  margin: 8rpx 0;             /* 上下间距调整为8rpx（较小） */
+  padding: 0;                 /* 去掉多余内边距 */
+  background-color: #ffffff;  /* 保持白底 */
+}
+
+
+.comment-tag {
+  display: inline-block;
+  background-color: #f47c9a;
+  color: white;
+  padding: 6rpx 20rpx;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  line-height: 36rpx;
+  max-width: max-content;  /* 根据内容宽度自适应 */
+}
+
+
+/* 评论列表无边框，留白 */
+.comment-section {
+  padding: 0 10rpx;
+}
+
+/* 单条评论 */
+.comment {
+  margin-bottom: 40rpx;
+}
+
+/* 评论内容字体和行距 */
+.comment-main {
+  margin-bottom: 10rpx;
+}
+
+.comment-content {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 40rpx;
+}
+
+/* 评论图片 */
+.comment-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
+  margin-top: 12rpx;
+  margin-right: 12rpx;
+  object-fit: cover;
+  display: inline-block;
+}
+
+/* 评论底部用户信息右下角显示 */
+.comment-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comment-user {
+  font-size: 24rpx;
+  color: #999;
+  font-style: italic;
+}

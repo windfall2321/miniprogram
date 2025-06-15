@@ -8,9 +8,11 @@
     "pages/adoption-list/adoption-list",
 
     "pages/allTopics/allTopics",
+    "pages/topicDetail/topicDetail",
     "pages/add-adoption/add-adoption",
     "pages/petEncyclopedias/petEncy",
     "pages/my_adoption/my_adoption"
+
 
   ],
   "window": {
