@@ -1,0 +1,23 @@
+<!-- pages/allTopics/allTopics.wxml -->
+<view class="topic-list">
+  <block wx:for="{{topics}}" wx:key="id">
+    <view class="topic-card" bindtap="goToDetail" data-id="{{item.topicId}}">
+      <view class="topic-header">
+        <text class="topic-title">{{item.title}}</text>
+        
+      </view>
+      <view class="topic-body">
+        <text class="topic-content">{{item.content}}</text>
+        <view class="topic-images" wx:if="{{item.images && item.images.length}}">
+          <image
+            wx:for="{{item.images}}"
+            wx:key="*this"
+            class="topic-img"
+            mode="aspectFill"
+            src="{{item}}"
+          />
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

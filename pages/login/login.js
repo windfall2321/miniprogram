@@ -42,9 +42,10 @@ Page({
         });
 
         // 修改这里：使用 redirectTo 而不是 switchTab
-        wx.redirectTo({
+        wx.switchTab({
           url: '/pages/index/index'
         });
+        
       })
       .catch(error => {
         wx.hideLoading();

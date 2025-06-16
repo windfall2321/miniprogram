@@ -5,12 +5,49 @@
     "pages/register/register",
     "pages/edit-profile/edit-profile",
     "pages/logs/logs",
-    "pages/petEncyclopedias/petEncy"
+    "pages/adoption-list/adoption-list",
+
+    "pages/allTopics/allTopics",
+    "pages/topicDetail/topicDetail",
+    "pages/add-adoption/add-adoption",
+    "pages/petEncyclopedias/petEncy",
+    "pages/my_adoption/my_adoption"
+
+
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "宠物小程序",
     "navigationBarBackgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1AAD19",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+
+     
+      {
+        "pagePath": "pages/allTopics/allTopics",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "交流"
+      },
+
+      {
+        "pagePath": "pages/adoption-list/adoption-list",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "领养"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "我的"
+      }
+    ]
   },
   "style": "v2",
   "componentFramework": "glass-easel",
