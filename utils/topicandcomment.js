@@ -60,7 +60,7 @@ const topicService = {
     if (res.code === 200 && Array.isArray(res.data)) {
       const commentsWithImages = await Promise.all(
         res.data.map(async (comment) => {
-          const imgRes = await http.get(`/images/comment/${comment.id}`);
+          const imgRes = await http.get(`/images/comment/${comment.commentId}`);
           if (Array.isArray(imgRes)) {
             comment.images = imgRes.map(img => processImageUrl(img.imageUrl));
           } else {
