@@ -11,7 +11,13 @@
     "pages/topicDetail/topicDetail",
     "pages/add-adoption/add-adoption",
     "pages/petEncyclopedias/petEncy",
-    "pages/my_adoption/my_adoption"
+    "pages/my_adoption/my_adoption",
+    "pages/pets/pets",
+    "pages/add-pet/add-pet",
+    "pages/edit-pet/edit-pet",
+    "pages/health-list/health-list",
+    "pages/add-health/add-health",
+    "pages/edit-health/edit-health"
 
 
   ],

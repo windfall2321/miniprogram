@@ -1,0 +1,337 @@
+.health-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  padding: 20rpx;
+}
+
+/* 页面头部 */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 20rpx;
+  margin-bottom: 30rpx;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 15rpx;
+}
+
+.health-icon {
+  font-size: 40rpx;
+  animation: pulse 2s infinite;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 15rpx 25rpx;
+  background: linear-gradient(45deg, #4caf50, #66bb6a);
+  color: white;
+  border-radius: 25rpx;
+  font-size: 28rpx;
+  border: none;
+  box-shadow: 0 4rpx 15rpx rgba(76, 175, 80, 0.3);
+  transition: all 0.3s ease;
+}
+
+.add-button:active {
+  transform: scale(0.95);
+}
+
+.add-icon {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+/* 宠物信息卡片 */
+.pet-info-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  padding: 25rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 25rpx rgba(0, 0, 0, 0.1);
+}
+
+.pet-basic-info {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.pet-image-container {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 15rpx;
+  overflow: hidden;
+  background: #f8f9fa;
+  border: 3rpx solid #e9ecef;
+}
+
+.pet-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pet-image.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.placeholder-icon {
+  font-size: 40rpx;
+  color: #adb5bd;
+}
+
+.pet-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.pet-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.pet-breed {
+  font-size: 26rpx;
+  color: #6c757d;
+}
+
+/* 健康记录列表 */
+.health-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25rpx;
+}
+
+.health-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  padding: 25rpx;
+  box-shadow: 0 8rpx 25rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.health-card:active {
+  transform: translateY(-2rpx);
+  box-shadow: 0 12rpx 30rpx rgba(0, 0, 0, 0.15);
+}
+
+.health-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 15rpx;
+  border-bottom: 2rpx solid #f1f3f4;
+}
+
+.health-type {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.type-icon {
+  font-size: 32rpx;
+}
+
+.type-text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.record-date {
+  font-size: 24rpx;
+  color: #6c757d;
+}
+
+.health-content {
+  margin-bottom: 20rpx;
+}
+
+.description {
+  font-size: 28rpx;
+  color: #495057;
+  line-height: 1.6;
+}
+
+.health-actions {
+  display: flex;
+  gap: 15rpx;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  padding: 15rpx 10rpx;
+  border-radius: 15rpx;
+  border: none;
+  font-size: 24rpx;
+  transition: all 0.3s ease;
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+.edit-btn {
+  background: linear-gradient(45deg, #ffd93d, #ffb347);
+  color: white;
+}
+
+.delete-btn {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+  color: white;
+}
+
+.action-icon {
+  font-size: 32rpx;
+}
+
+.action-text {
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30rpx;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  animation: float 3s ease-in-out infinite;
+}
+
+.empty-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #495057;
+}
+
+.empty-desc {
+  font-size: 28rpx;
+  color: #6c757d;
+  line-height: 1.5;
+}
+
+.add-button-primary {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  padding: 20rpx 40rpx;
+  background: linear-gradient(45deg, #4caf50, #66bb6a);
+  color: white;
+  border-radius: 30rpx;
+  font-size: 30rpx;
+  border: none;
+  box-shadow: 0 8rpx 25rpx rgba(76, 175, 80, 0.3);
+  transition: all 0.3s ease;
+}
+
+.add-button-primary:active {
+  transform: scale(0.95);
+}
+
+/* 加载状态 */
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30rpx;
+}
+
+.loading-animation {
+  display: flex;
+  gap: 10rpx;
+}
+
+.loading-dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: #4caf50;
+  animation: loading 1.4s ease-in-out infinite both;
+}
+
+.loading-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #6c757d;
+}
+
+/* 动画 */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20rpx);
+  }
+}
+
+@keyframes loading {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+} 

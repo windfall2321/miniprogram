@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的宠物",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f5f5f5",
+  "usingComponents": {}
+}

@@ -1,0 +1,62 @@
+<view class="add-pet-container">
+  <view class="form-header">
+    <text class="title">添加宠物</text>
+  </view>
+
+  <view class="form-content">
+    <!-- 表单内容 -->
+    <view class="form-group">
+      <view class="form-item">
+        <text class="label">宠物名称</text>
+        <input 
+          class="input" 
+          type="text" 
+          placeholder="请输入宠物名称" 
+          value="{{formData.name}}"
+          bindinput="onNameInput"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">品种</text>
+        <input 
+          class="input" 
+          type="text" 
+          placeholder="请输入宠物品种" 
+          value="{{formData.breed}}"
+          bindinput="onBreedInput"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">性别</text>
+        <radio-group class="radio-group" bindchange="onGenderChange">
+          <label class="radio">
+            <radio value="0" checked="{{formData.gender === '0'}}"/>公
+          </label>
+          <label class="radio">
+            <radio value="1" checked="{{formData.gender === '1'}}"/>母
+          </label>
+        </radio-group>
+      </view>
+
+      <view class="form-item">
+        <text class="label">城市</text>
+        <input 
+          class="input" 
+          type="text" 
+          placeholder="请输入所在城市" 
+          value="{{formData.city}}"
+          bindinput="onCityInput"
+        />
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="form-footer">
+    <button class="submit-btn" bindtap="handleSubmit" loading="{{submitting}}">
+      添加宠物
+    </button>
+  </view>
+</view> 

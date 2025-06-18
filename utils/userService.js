@@ -41,6 +41,8 @@ const userService = {
         const userInfoRes = await this.getUserInfo();
         if (userInfoRes.code === 200 && userInfoRes.data) {
           wx.setStorageSync('userInfo', userInfoRes.data);
+          // 单独存储userId，方便其他页面使用
+          wx.setStorageSync('userId', userInfoRes.data.userId);
         }
       } catch (error) {
         console.error('获取用户信息失败:', error);
@@ -146,8 +148,10 @@ const userService = {
   // 退出登录
   logout: async function() {
     const response = await http.post('/user/logout');
-    // 清除token
+    // 清除所有用户相关数据
     wx.removeStorageSync('token');
+    wx.removeStorageSync('userInfo');
+    wx.removeStorageSync('userId');
     return response;
   }
 };

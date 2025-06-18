@@ -1,0 +1,94 @@
+<view class="pet-container">
+  <!-- 页面头部 -->
+  <view class="page-header">
+    <view class="page-title">
+      <text class="paw-icon">🐾</text>
+      <text class="title">我的宠物</text>
+    </view>
+    <button class="add-button" bindtap="navigateToAddPet">
+      <text class="add-icon">+</text>
+      <text>添加</text>
+    </button>
+  </view>
+
+  <!-- 宠物列表 -->
+  <view class="pet-list" wx:if="{{!loading && pets.length > 0}}">
+    <view class="pet-card" wx:for="{{pets}}" wx:key="petId">
+      <!-- 宠物基本信息区域 -->
+      <view class="pet-main-info">
+        <!-- 宠物图片 -->
+        <view class="pet-image-container">
+          <image 
+            class="pet-image" 
+            src="{{item.image}}" 
+            mode="aspectFill"
+            wx:if="{{item.image}}"
+          />
+          <view class="pet-image placeholder" wx:else>
+            <text class="placeholder-icon">🐾</text>
+          </view>
+        </view>
+
+        <!-- 宠物详细信息 -->
+        <view class="pet-info">
+          <view class="pet-name-row">
+            <text class="pet-name">{{item.name}}</text>
+            <text class="pet-gender">{{item.gender === '0' ? '♂' : '♀'}}</text>
+          </view>
+          
+          <view class="pet-details">
+            <view class="detail-row">
+              <text class="detail-label">品种:</text>
+              <text class="detail-value">{{item.breed || '未知'}}</text>
+            </view>
+            <view class="detail-row">
+              <text class="detail-label">城市:</text>
+              <text class="detail-value">{{item.city || '未知'}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 操作按钮区域 -->
+      <view class="pet-actions">
+        <button class="action-btn health-btn" bindtap="viewHealthRecord" data-pet="{{item}}">
+          <text class="action-icon">💊</text>
+          <text class="action-text">健康</text>
+        </button>
+        <button class="action-btn edit-btn" bindtap="editPet" data-pet="{{item}}">
+          <text class="action-icon">✏️</text>
+          <text class="action-text">编辑</text>
+        </button>
+        <button class="action-btn delete-btn" bindtap="confirmDelete" data-pet="{{item}}">
+          <text class="action-icon">🗑️</text>
+          <text class="action-text">删除</text>
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:elif="{{!loading && pets.length === 0}}">
+    <view class="empty-content">
+      <view class="empty-icon">🐾</view>
+      <text class="empty-title">还没有宠物呢</text>
+      <text class="empty-desc">快来添加你的第一个宠物伙伴吧！</text>
+      <button class="add-button-primary" bindtap="navigateToAddPet">
+        <text class="add-icon">+</text>
+        <text>添加宠物</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <view class="loading-content">
+      <view class="loading-animation">
+        <view class="loading-dot"></view>
+        <view class="loading-dot"></view>
+        <view class="loading-dot"></view>
+      </view>
+      <text class="loading-text">正在加载宠物信息...</text>
+    </view>
+  </view>
+</view> 
