@@ -141,4 +141,10 @@ Page({
       });
     }
   },
+  // 导航到我的宠物页面
+  navigateToMyPets() {
+    wx.navigateTo({
+      url: '/pages/pets/pets'
+    });
+  },
 })
