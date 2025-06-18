@@ -21,3 +21,32 @@
     </view>
   </block>
 </view>
+<!-- 悬浮发布按钮 -->
+<view class="fab" bindtap="openPostModal">
+  <text class="plus">+</text>
+</view>
+
+<!-- 发布弹窗 -->
+<view wx:if="{{showPostModal}}" class="modal-mask">
+  <view class="modal">
+    <view class="modal-title">发布帖子</view>
+    <input class="modal-input" placeholder="标题" model:value="{{newPost.title}}" bindinput="onInputTitle"/>
+    <textarea class="modal-textarea" placeholder="内容" model:value="{{newPost.content}}" bindinput="onInputContent"/>
+
+    <!-- 选择图片 -->
+    <view class="image-picker">
+      <button size="mini" bindtap="chooseImage">选择图片</button>
+      <view class="selected-images">
+        <block wx:for="{{newPost.images}}" wx:key="*this">
+          <image class="preview-image" src="{{item}}" mode="aspectFill"/>
+        </block>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="modal-actions">
+      <button class="cancel-btn" bindtap="closePostModal">取消</button>
+      <button class="submit-btn" bindtap="submitPost">发布</button>
+    </view>
+  </view>
+</view>

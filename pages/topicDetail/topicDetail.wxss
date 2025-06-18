@@ -110,3 +110,86 @@
   color: #999;
   font-style: italic;
 }
+
+/* 悬浮按钮 */
+.fab {
+  position: fixed;
+  bottom: 60rpx;
+  right: 60rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background-color: #f47c9a;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 60rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+.plus {
+  font-size: 60rpx;
+}
+
+/* 弹窗遮罩 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 弹窗内容 */
+.modal {
+  background: #fff;
+  padding: 40rpx;
+  width: 80%;
+  border-radius: 20rpx;
+}
+.modal-title {
+  font-size: 36rpx;
+  margin-bottom: 20rpx;
+  font-weight: bold;
+}
+.modal-input,
+.modal-textarea {
+  border: 1rpx solid #ccc;
+  border-radius: 10rpx;
+  padding: 16rpx;
+  margin-bottom: 20rpx;
+  width: 100%;
+}
+.modal-textarea {
+  height: 200rpx;
+}
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+.cancel-btn,
+.submit-btn {
+  width: 45%;
+}
+.image-picker {
+  margin-bottom: 20rpx;
+}
+.selected-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-top: 10rpx;
+}
+.preview-image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 10rpx;
+  object-fit: cover;
+}
+
