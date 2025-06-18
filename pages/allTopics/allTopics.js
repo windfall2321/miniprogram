@@ -69,25 +69,71 @@ Page({
       }
     });
   },
+  // async submitPost() {
+  //   const { title, content } = this.data.newPost;
+  //   if (!title || !content) {
+  //     wx.showToast({ title: '请填写完整', icon: 'none' });
+  //     return;
+  //   }
+  
+  //   try {
+  //     await require('../../utils/topicandcomment').addTopic({
+  //       title,
+  //       content
+  //     });
+  //     wx.showToast({ title: '发布成功', icon: 'success' });
+  //     this.setData({ showPostModal: false });
+  //     this.loadTopics(); // 重新加载帖子
+  //   } catch (err) {
+  //     wx.showToast({ title: '发布失败', icon: 'none' });
+  //   }
+  // }
+
   async submitPost() {
-    const { title, content } = this.data.newPost;
+    const { title, content, images } = this.data.newPost;
+  
     if (!title || !content) {
       wx.showToast({ title: '请填写完整', icon: 'none' });
       return;
     }
   
     try {
-      await require('../../utils/topicandcomment').addTopic({
-        title,
-        content
-      });
+      const topicService = require('../../utils/topicandcomment');
+  
+      // 1. 创建帖子
+      const res = await topicService.addTopic({ title, content });
+  
+      let topicId = null;
+      if (res && res.data && res.data.topicId) {
+        topicId = res.data.topicId;
+      } else {
+        throw new Error('帖子创建失败，未返回topicId');
+      }
+      console.log('上传图片使用的topicId:', topicId);
+
+      // 2. 上传图片（如果有）
+      if (Array.isArray(images) && images.length > 0) {
+        for (let i = 0; i < images.length; i++) {
+          const filePath = images[i];
+          await topicService.uploadImage(filePath, 'topic', topicId);
+        }
+        
+      }
+  
+      // 3. 成功提示 + 清空表单
       wx.showToast({ title: '发布成功', icon: 'success' });
-      this.setData({ showPostModal: false });
-      this.loadTopics(); // 重新加载帖子
+      this.setData({
+        showPostModal: false,
+        newPost: { title: '', content: '', images: [] }
+      });
+      this.loadTopics();
+  
     } catch (err) {
+      console.error(err);
       wx.showToast({ title: '发布失败', icon: 'none' });
     }
   }
+  
   
   
   
