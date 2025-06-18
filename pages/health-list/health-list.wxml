@@ -1,0 +1,87 @@
+<view class="health-container">
+  <!-- 页面头部 -->
+  <view class="page-header">
+    <view class="page-title">
+      <text class="health-icon">💊</text>
+      <text class="title">健康记录</text>
+    </view>
+    <button class="add-button" bindtap="navigateToAddHealth">
+      <text class="add-icon">+</text>
+      <text>添加</text>
+    </button>
+  </view>
+
+  <!-- 宠物信息卡片 -->
+  <view class="pet-info-card" wx:if="{{petInfo}}">
+    <view class="pet-basic-info">
+      <view class="pet-image-container">
+        <image 
+          class="pet-image" 
+          src="{{petInfo.image}}" 
+          mode="aspectFill"
+          wx:if="{{petInfo.image}}"
+        />
+        <view class="pet-image placeholder" wx:else>
+          <text class="placeholder-icon">🐾</text>
+        </view>
+      </view>
+      <view class="pet-details">
+        <text class="pet-name">{{petInfo.name}}</text>
+        <text class="pet-breed">{{petInfo.breed || '未知品种'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 健康记录列表 -->
+  <view class="health-list" wx:if="{{!loading && healthRecords.length > 0}}">
+    <view class="health-card" wx:for="{{healthRecords}}" wx:key="recordId">
+      <view class="health-header">
+        <view class="health-type">
+          <text class="type-icon">{{item.type === '疫苗' ? '💉' : item.type === '体检' ? '🏥' : '💊'}}</text>
+          <text class="type-text">{{item.type}}</text>
+        </view>
+        <text class="record-date">{{item.recordDate}}</text>
+      </view>
+      
+      <view class="health-content">
+        <text class="description">{{item.description}}</text>
+      </view>
+
+      <view class="health-actions">
+        <button class="action-btn edit-btn" bindtap="editHealthRecord" data-record="{{item}}">
+          <text class="action-icon">✏️</text>
+          <text class="action-text">编辑</text>
+        </button>
+        <button class="action-btn delete-btn" bindtap="confirmDeleteRecord" data-record="{{item}}">
+          <text class="action-icon">🗑️</text>
+          <text class="action-text">删除</text>
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:elif="{{!loading && healthRecords.length === 0}}">
+    <view class="empty-content">
+      <view class="empty-icon">💊</view>
+      <text class="empty-title">还没有健康记录</text>
+      <text class="empty-desc">快来为{{petInfo.name}}添加第一条健康记录吧！</text>
+      <button class="add-button-primary" bindtap="navigateToAddHealth">
+        <text class="add-icon">+</text>
+        <text>添加记录</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <view class="loading-content">
+      <view class="loading-animation">
+        <view class="loading-dot"></view>
+        <view class="loading-dot"></view>
+        <view class="loading-dot"></view>
+      </view>
+      <text class="loading-text">正在加载健康记录...</text>
+    </view>
+  </view>
+</view> 

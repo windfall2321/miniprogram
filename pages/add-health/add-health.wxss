@@ -1,0 +1,263 @@
+.add-health-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  padding: 20rpx;
+}
+
+/* 页面头部 */
+.page-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30rpx 20rpx;
+  margin-bottom: 30rpx;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 15rpx;
+}
+
+.health-icon {
+  font-size: 40rpx;
+  animation: pulse 2s infinite;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 表单容器 */
+.form-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 25rpx rgba(0, 0, 0, 0.1);
+}
+
+.form-item {
+  margin-bottom: 40rpx;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-item.hidden {
+  display: none;
+}
+
+.label {
+  display: block;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.required {
+  color: #f44336;
+  font-weight: bold;
+}
+
+.value {
+  font-size: 28rpx;
+  color: #666;
+  padding: 15rpx;
+  background: #f8f9fa;
+  border-radius: 10rpx;
+}
+
+/* 类型选择 */
+.type-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.type-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15rpx;
+  padding: 20rpx 20rpx;
+  background: #f8f9fa;
+  border: 3rpx solid #e9ecef;
+  border-radius: 10rpx;
+  transition: all 0.3s ease;
+}
+
+.type-option:active {
+  transform: scale(0.95);
+}
+
+.type-option.selected {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  border-color: #4caf50;
+  color: white;
+  box-shadow: 0 4rpx 15rpx rgba(76, 175, 80, 0.3);
+}
+
+.type-icon {
+  font-size: 40rpx;
+}
+
+.type-label {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+/* 日期选择器 */
+.date-picker {
+  width: 100%;
+}
+
+.picker-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border: 2rpx solid #e9ecef;
+  border-radius: 10rpx;
+  transition: all 0.3s ease;
+}
+
+.picker-content:active {
+  background: #e9ecef;
+}
+
+.picker-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.picker-icon {
+  font-size: 32rpx;
+}
+
+/* 描述输入框 */
+.description-input {
+  width: 100%;
+  min-height: 120rpx;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border: 2rpx solid #e9ecef;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
+  resize: none;
+}
+
+.description-input:focus {
+  border-color: #4caf50;
+  background: white;
+}
+
+.char-count {
+  display: block;
+  text-align: right;
+  font-size: 24rpx;
+  color: #6c757d;
+  margin-top: 10rpx;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.cancel-btn, .submit-btn {
+  flex: 1;
+  padding: 25rpx;
+  border-radius: 15rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn {
+  background: #f8f9fa;
+  color: #6c757d;
+  border: 2rpx solid #e9ecef;
+}
+
+.cancel-btn:active {
+  background: #e9ecef;
+  transform: scale(0.95);
+}
+
+.submit-btn {
+  background: linear-gradient(45deg, #4caf50, #66bb6a);
+  color: white;
+  box-shadow: 0 4rpx 15rpx rgba(76, 175, 80, 0.3);
+}
+
+.submit-btn:active {
+  transform: scale(0.95);
+}
+
+.submit-btn[disabled] {
+  background: #ccc;
+  box-shadow: none;
+}
+
+
+
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15rpx;
+  margin-bottom: 20rpx;
+}
+
+.tip-item:last-child {
+  margin-bottom: 0;
+}
+
+.tip-icon {
+  font-size: 28rpx;
+  margin-top: 2rpx;
+}
+
+.tip-text {
+  font-size: 26rpx;
+  color: #6c757d;
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* 动画效果 */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 750rpx) {
+  .type-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+} 

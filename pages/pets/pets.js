@@ -94,14 +94,9 @@ Page({
   // 查看健康记录
   viewHealthRecord(e) {
     const pet = e.currentTarget.dataset.pet;
-    wx.showToast({
-      title: '健康记录功能开发中',
-      icon: 'none'
+    wx.navigateTo({
+      url: `/pages/health-list/health-list?pet=${JSON.stringify(pet)}`
     });
-    // TODO: 跳转到健康记录页面
-    // wx.navigateTo({
-    //   url: `/pages/health-record/health-record?petId=${pet.petId}`
-    // });
   },
 
   // 确认删除宠物

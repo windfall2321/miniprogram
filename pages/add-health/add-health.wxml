@@ -1,0 +1,84 @@
+<view class="add-health-container">
+  <!-- 页面头部 -->
+  <view class="page-header">
+    <view class="page-title">
+      <text class="health-icon">💊</text>
+      <text class="title">添加健康记录</text>
+    </view>
+  </view>
+
+  <!-- 表单内容 -->
+  <view class="form-container">
+    <!-- 宠物ID（自动填充，不显示） -->
+    <view class="form-item hidden">
+      <text class="label">宠物ID</text>
+      <text class="value">{{petId}}</text>
+    </view>
+
+    <!-- 记录类型选择 -->
+    <view class="form-item">
+      <text class="label">记录类型 <text class="required">*</text></text>
+      <view class="type-options">
+        <view 
+          class="type-option {{type === item.value ? 'selected' : ''}}" 
+          wx:for="{{typeOptions}}" 
+          wx:key="value"
+          bindtap="selectType"
+          data-type="{{item.value}}"
+        >
+          <text class="type-icon">{{item.icon}}</text>
+          <text class="type-label">{{item.label}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 记录日期 -->
+    <view class="form-item">
+      <text class="label">记录日期 <text class="required">*</text></text>
+      <picker 
+        mode="date" 
+        value="{{recordDate}}" 
+        bindchange="selectDate"
+        class="date-picker"
+      >
+        <view class="picker-content">
+          <text class="picker-text">{{recordDate || '请选择日期'}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 描述信息 -->
+    <view class="form-item">
+      <text class="label">描述信息 <text class="required">*</text></text>
+      <textarea 
+        class="description-input"
+        placeholder="请输入健康记录的详细描述..."
+        value="{{description}}"
+        bindinput="inputDescription"
+        maxlength="500"
+        auto-height
+      ></textarea>
+      <text class="char-count">{{description.length}}/500</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <button 
+      class="cancel-btn" 
+      bindtap="cancel"
+      disabled="{{submitting}}"
+    >
+      取消
+    </button>
+    <button 
+      class="submit-btn" 
+      bindtap="submitForm"
+      disabled="{{submitting}}"
+    >
+      <text wx:if="{{!submitting}}">提交</text>
+      <text wx:else>提交中...</text>
+    </button>
+  </view>
+
+</view> 
