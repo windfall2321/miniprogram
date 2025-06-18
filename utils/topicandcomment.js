@@ -80,6 +80,11 @@ const topicService = {
     return http.post('/topic/addmini', topicData);
   },
 
+  // 发布评论
+  async addComment(CommentData) {
+    return http.post('/comment/addmini', CommentData);
+  },
+
   // 删除帖子
   async deleteTopic(topicId) {
     return http.delete(`/topic/delete/${topicId}`);
