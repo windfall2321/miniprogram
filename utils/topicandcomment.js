@@ -77,7 +77,7 @@ const topicService = {
 
   // 发布帖子
   async addTopic(topicData) {
-    return http.post('/topic/add', topicData);
+    return http.post('/topic/addmini', topicData);
   },
 
   // 删除帖子
