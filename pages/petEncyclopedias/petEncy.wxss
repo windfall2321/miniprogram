@@ -664,12 +664,13 @@ page {
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 20rpx; /* 修改：减少内边距 */
-  border: 2rpx solid var(--border-color);
-  border-radius: 12rpx; /* 修改：减小圆角 */
-  font-size: 28rpx; /* 修改：减小字体 */
+  height: 44px; /* 增加高度 */
+  line-height: 44px; /* 设置行高让文字垂直居中 */
   box-sizing: border-box;
-  box-shadow: 0 0 0 4rpx rgba(85, 181, 89, 0.1); /* 修改：减少阴影 */
+  padding: 0 12px;
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
 }
 
 .picker-input {

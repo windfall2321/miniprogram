@@ -13,14 +13,14 @@ Page({
     totalPages: 0,
     searchKeyword: '',
     categoryFilter: '',
-    categoryOptions: ['所有类别', '🐱 猫', '🐶 狗狗', '🐹 小宠', '🐾 其他'],
+    categoryOptions: ['所有类别', '🐱 猫咪', '🐶 狗狗', '🐹 小宠', '🐾 其他'],
     categoryIndex: 0,
     pageSizeOptions: ['5', '10', '20', '50'],
     pageSizeIndex: 1, // 默认选择10
     showModal: false,
     isEditing: false,
     petForm: {},
-    formCategoryOptions: ['🐱 猫', '🐶 狗狗', '🐹 小宠', '🐾 其他'],
+    formCategoryOptions: ['🐱 猫咪', '🐶 狗狗', '🐹 小宠', '🐾 其他'],
     showDeleteModal: false,
     petToDelete: null,
     debounceTimer: null
@@ -258,8 +258,8 @@ Page({
     if (index > 0) {
       // 提取类别名称，与Vue版本保持一致
       const selectedOption = this.data.categoryOptions[index];
-      if (selectedOption === '🐱 猫') {
-        categoryFilter = '猫';
+      if (selectedOption === '🐱 猫咪') {
+        categoryFilter = '猫咪';
       } else if (selectedOption === '🐶 狗狗') {
         categoryFilter = '狗狗';
       } else if (selectedOption === '🐹 小宠') {
@@ -353,7 +353,7 @@ Page({
     // 找到类别在表单选项中的索引，与Vue版本保持一致
     let categoryIndex = 0;
     this.data.formCategoryOptions.forEach((option, index) => {
-      if ((option === '🐱 猫' && pet.category === '猫') ||
+      if ((option === '🐱 猫咪' && pet.category === '猫咪') ||
           (option === '🐶 狗狗' && pet.category === '狗狗') ||
           (option === '🐹 小宠' && pet.category === '小宠') ||
           (option === '🐾 其他' && pet.category === '其他')) {
@@ -402,8 +402,8 @@ Page({
     let category = '';
     
     // 提取类别名称，与Vue版本保持一致
-    if (selectedOption === '🐱 猫') {
-      category = '猫';
+    if (selectedOption === '🐱 猫咪') {
+      category = '猫咪';
     } else if (selectedOption === '🐶 狗狗') {
       category = '狗狗';
     } else if (selectedOption === '🐹 小宠') {
@@ -448,7 +448,7 @@ Page({
 
     if (!isEditing) {
       // 使用与Vue相同的ID生成方式
-      formData.pet_ency_id = parseInt(Date.now() / 1000000000);
+      formData.pet_ency_id = 0;
     } else {
       // 确保编辑时ID不为空
       if (!formData.pet_ency_id) {
@@ -581,7 +581,7 @@ Page({
    */
   getEmptyPetForm: function () {
     return {
-      pet_ency_id: 1, // 与Vue版本保持一致
+      pet_ency_id: 0,
       variety_name: '',
       category: '',
       categoryIndex: 0,

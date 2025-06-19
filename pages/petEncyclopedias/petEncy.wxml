@@ -224,7 +224,7 @@
       <view class="modal-body">
         <scroll-view scroll-y="true" class="form-scroll">
           <view class="form-grid">
-            <view class="form-group">
+            <view class="form-group full-width">
               <text class="form-label">
                 <text class="required-star">*</text>名称
               </text>
@@ -236,7 +236,7 @@
               />
             </view>
 
-            <view class="form-group">
+            <view class="form-group full-width">
               <text class="form-label">
                 <text class="required-star">*</text>类别
               </text>
@@ -252,7 +252,7 @@
               </picker>
             </view>
 
-            <view class="form-group">
+            <view class="form-group full-width">
               <text class="form-label">体型</text>
               <input
                 type="text"
@@ -263,7 +263,7 @@
               />
             </view>
 
-            <view class="form-group">
+            <view class="form-group full-width">
               <text class="form-label">身高</text>
               <input
                 type="text"
@@ -274,7 +274,7 @@
               />
             </view>
 
-            <view class="form-group">
+            <view class="form-group full-width">
               <text class="form-label">体重</text>
               <input
                 type="text"
@@ -285,7 +285,7 @@
               />
             </view>
 
-            <view class="form-group">
+            <view class="form-group full-width">
               <text class="form-label">寿命</text>
               <input
                 type="text"
@@ -296,7 +296,7 @@
               />
             </view>
 
-            <view class="form-group">
+            <view class="form-group full-width">
               <text class="form-label">尾巴特征</text>
               <input
                 type="text"
@@ -307,7 +307,7 @@
               />
             </view>
 
-            <view class="form-group">
+            <view class="form-group full-width">
               <text class="form-label">耳朵特征</text>
               <input
                 type="text"
@@ -318,7 +318,7 @@
               />
             </view>
 
-            <view class="form-group">
+            <view class="form-group full-width">
               <text class="form-label">眼睛特征</text>
               <input
                 type="text"
@@ -329,7 +329,7 @@
               />
             </view>
 
-            <view class="form-group">
+            <view class="form-group full-width">
               <text class="form-label">毛色</text>
               <input
                 type="text"
@@ -340,7 +340,7 @@
               />
             </view>
 
-            <view class="form-group">
+            <view class="form-group full-width">
               <text class="form-label">毛长</text>
               <input
                 type="text"
@@ -351,7 +351,7 @@
               />
             </view>
 
-            <view class="form-group">
+            <view class="form-group full-width">
               <text class="form-label">图片URL</text>
               <input
                 type="text"
@@ -365,24 +365,24 @@
 
           <view class="form-group full-width">
             <text class="form-label">简介</text>
-            <textarea
+            <input
               value="{{petForm.introduction}}"
               bindinput="onFormInput"
               data-field="introduction"
               placeholder="请输入宠物简介"
               maxlength="500"
-            ></textarea>
+            ></input>
           </view>
 
           <view class="form-group full-width">
             <text class="form-label">饲养注意事项</text>
-            <textarea
+            <input
               value="{{petForm.feeding_matters}}"
               bindinput="onFormInput"
               data-field="feeding_matters"
               placeholder="请输入饲养注意事项"
               maxlength="500"
-            ></textarea>
+            ></input>
           </view>
 
           <view class="form-actions">
