@@ -23,15 +23,15 @@ Page({
       petName: '',
       petType: '',
       petBreed: '',
-      petGender: 'male',
+      gender: '0',
       petCity: '',
       description: '',
       petImage: ''
     },
     petTypes: [
-      { value: 'cat', label: '猫咪' },
-      { value: 'dog', label: '狗狗' },
-      { value: 'other', label: '其他' }
+      { label: '狗', value: 'dog' },
+      { label: '猫', value: 'cat' },
+      { label: '其他', value: 'other' }
     ],
     petTypeIndex: 0,
     submitting: false,
@@ -113,7 +113,7 @@ Page({
 
   onGenderChange(e) {
     this.setData({
-      'formData.petGender': e.detail.value
+      'formData.gender': e.detail.value
     });
   },
 
@@ -126,12 +126,30 @@ Page({
       });
 
       const tempFilePath = res.tempFilePaths[0];
-      // 只更新预览图片
-      this.setData({
-        'formData.petImage': tempFilePath,
-        tempImagePath: tempFilePath
+      // 检查图片大小，最大10MB
+      wx.getFileInfo({
+        filePath: tempFilePath,
+        success: (info) => {
+          if (info.size > 10 * 1024 * 1024) {
+            wx.showToast({
+              title: '图片不能超过10MB',
+              icon: 'none'
+            });
+            return;
+          }
+          // 只更新预览图片
+          this.setData({
+            'formData.petImage': tempFilePath,
+            tempImagePath: tempFilePath
+          });
+        },
+        fail: () => {
+          wx.showToast({
+            title: '获取图片信息失败',
+            icon: 'none'
+          });
+        }
       });
-
     } catch (err) {
       console.error('选择图片失败:', err);
       wx.showToast({
@@ -150,7 +168,7 @@ Page({
   },
 
   validateForm() {
-    const { petName, petType, petBreed, petGender, petCity, description } = this.data.formData;
+    const { petName, petType, petBreed, gender, petCity, description } = this.data.formData;
     if (!petName.trim()) {
       throw new Error('请输入宠物名称');
     }
@@ -160,7 +178,7 @@ Page({
     if (!petBreed.trim()) {
       throw new Error('请输入宠物品种');
     }
-    if (!petGender) {
+    if (!gender) {
       throw new Error('请选择宠物性别');
     }
     if (!petCity.trim()) {
@@ -199,7 +217,7 @@ Page({
         name: this.data.formData.petName,
         type: this.data.formData.petType,
         breed: this.data.formData.petBreed,
-        gender: this.data.formData.petGender === 'male' ? 1 : 2,
+        gender: Number(this.data.formData.gender),
         city: this.data.formData.petCity,
         ownerId: userInfo.userId,
         image: '/default-pet.jpg' // 先使用默认图片

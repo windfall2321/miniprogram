@@ -45,13 +45,13 @@
 
       <view class="form-item">
         <text class="label required">性别</text>
-        <radio-group name="petGender" bindchange="onGenderChange" class="radio-group">
+        <radio-group name="gender" bindchange="onGenderChange" class="radio-group">
           <label class="radio-label">
-            <radio value="male" checked="{{formData.petGender === 'male'}}" color="#ff914d" />
+            <radio value="0" checked="{{formData.gender === '0'}}" color="#ff914d" />
             <text>公</text>
           </label>
           <label class="radio-label">
-            <radio value="female" checked="{{formData.petGender === 'female'}}" color="#ff914d" />
+            <radio value="1" checked="{{formData.gender === '1'}}" color="#ff914d" />
             <text>母</text>
           </label>
         </radio-group>
