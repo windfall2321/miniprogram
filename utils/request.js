@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8080/pet/api'; // 开发环境API地址
+const BASE_URL = 'http://47.110.58.252:8080/pet/api'; // 开发环境API地址
 
 const request = (url, options = {}) => {
   let finalUrl = url;

@@ -36,15 +36,15 @@
      
       {
         "pagePath": "pages/allTopics/allTopics",
-        "iconPath": "",
-        "selectedIconPath": "",
+        "iconPath": "images/ic_community.png",
+        "selectedIconPath": "images/ic_community.png",
         "text": "交流"
       },
 
       {
         "pagePath": "pages/adoption-list/adoption-list",
-        "iconPath": "",
-        "selectedIconPath": "",
+        "iconPath": "images/ic_adopt.png",
+        "selectedIconPath": "images/ic_adopt.png",
         "text": "领养"
       },
       {

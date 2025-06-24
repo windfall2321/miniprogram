@@ -8,8 +8,8 @@ const config = {
 
 // 生产环境配置
 const prodConfig = {
-  BASE_URL: 'https://api.yourdomain.com/pet/api',
-  IMAGE_BASE_URL: 'https://api.yourdomain.com/pet'
+  BASE_URL: 'https://47.110.58.252/pet/api',
+  IMAGE_BASE_URL: 'http://47.110.58.252/petimg/'
 };
 
 // 根据编译环境选择配置
