@@ -70,9 +70,9 @@
           />
           <view class="pet-image placeholder" wx:else>
             <view class="no-image">
-              <text wx:if="{{item.category === '猫'}}">🐱</text>
-              <text wx:elif="{{item.category === '狗'}}">🐶</text>
-              <text wx:elif="{{item.category === '鸟'}}">🦜</text>
+              <text wx:if="{{item.category === '猫咪'}}">🐱</text>
+              <text wx:elif="{{item.category === '狗狗'}}">🐶</text>
+              <text wx:elif="{{item.category === '小宠'}}">🐹</text>
               <text wx:else>🐾</text>
               <text class="no-image-text">暂无图片</text>
             </view>
@@ -226,14 +226,13 @@
           <view class="form-grid">
             <view class="form-group">
               <text class="form-label">
-                <text class="required-star">*</text>品种名称
+                <text class="required-star">*</text>名称
               </text>
               <input
                 type="text"
                 value="{{petForm.variety_name}}"
                 bindinput="onFormInput"
                 data-field="variety_name"
-                placeholder="请输入品种名称"
               />
             </view>
 

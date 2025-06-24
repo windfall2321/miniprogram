@@ -47,6 +47,14 @@
         "selectedIconPath": "images/ic_adopt.png",
         "text": "领养"
       },
+
+      {
+        "pagePath": "pages/petEncyclopedias/petEncy",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "百科"
+      },
+
       {
         "pagePath": "pages/index/index",
         "iconPath": "",
