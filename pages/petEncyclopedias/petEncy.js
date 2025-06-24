@@ -141,7 +141,7 @@ Page({
     }
   
     return this.request({
-      url: 'http://localhost:8080/pet/api/petEncy/page',
+      url: 'http://47.110.58.252:8080/pet/api/petEncy/page',
       method: 'GET',
       data: params
     }).then((res) => {
