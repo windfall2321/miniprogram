@@ -6,7 +6,8 @@ Page({
     topicId: null,
     topic: null,
     comments: [],
-    loading: true
+    loading: true,
+    cloudCommentImageUrl: null
   },
 
   async onLoad(options) {
@@ -107,8 +108,33 @@ Page({
       console.error(err);
       wx.showToast({ title: '评论失败', icon: 'none' });
     }
+  },
+
+  async handleChooseCommentImage() {
+    const res = await wx.chooseImage({ count: 1 });
+    const tempFilePath = res.tempFilePaths[0];
+    // 原有上传逻辑...
+    // 新增：上传到云开发
+    try {
+      const cloudPath = 'comment-images/' + Date.now() + '-' + Math.floor(Math.random() * 1000) + tempFilePath.match(/\.[^.]+?$/)[0];
+      const uploadRes = await wx.cloud.uploadFile({
+        cloudPath,
+        filePath: tempFilePath
+      });
+      const fileID = uploadRes.fileID;
+      // 获取临时 HTTPS 链接
+      const tempUrlRes = await wx.cloud.getTempFileURL({
+        fileList: [fileID]
+      });
+      const cloudCommentImageUrl = tempUrlRes.fileList[0].tempFileURL;
+      this.setData({
+        cloudCommentImageUrl
+      });
+    } catch (err) {
+      wx.showToast({
+        title: '云开发图片上传失败',
+        icon: 'none'
+      });
+    }
   }
-  
-  
-  
 });

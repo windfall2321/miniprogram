@@ -43,6 +43,8 @@
                 class="comment-image"
               />
             </view>
+
+            <image src="{{cloudCommentImageUrl || commentImageUrl || tempCommentImagePath}}" mode="aspectFill" />
           </view>
 
           <view class="comment-footer">

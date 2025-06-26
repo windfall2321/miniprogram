@@ -151,6 +151,29 @@ Page({
       } finally {
         wx.hideLoading();
       }
+
+      // 新增：上传到云开发
+      try {
+        const cloudPath = 'user-avatars/' + Date.now() + '-' + Math.floor(Math.random() * 1000) + tempFilePath.match(/\.[^.]+?$/)[0];
+        const uploadRes = await wx.cloud.uploadFile({
+          cloudPath,
+          filePath: tempFilePath
+        });
+        const fileID = uploadRes.fileID;
+        // 获取临时 HTTPS 链接
+        const tempUrlRes = await wx.cloud.getTempFileURL({
+          fileList: [fileID]
+        });
+        const cloudAvatarUrl = tempUrlRes.fileList[0].tempFileURL;
+        this.setData({
+          'userInfo.cloudProfile': cloudAvatarUrl
+        });
+      } catch (err) {
+        wx.showToast({
+          title: '云开发头像上传失败',
+          icon: 'none'
+        });
+      }
     } catch (error) {
       wx.hideLoading();
       console.error('选择图片失败:', error);

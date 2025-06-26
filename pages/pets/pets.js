@@ -54,7 +54,8 @@ Page({
           // 处理每个宠物的图片URL
           const pets = res.data.map(pet => ({
             ...pet,
-            image: processImageUrl(pet.image)
+            image: processImageUrl(pet.image),
+            displayImage: pet.cloudImageUrl || pet.image
           }));
           this.setData({ pets });
         } else {

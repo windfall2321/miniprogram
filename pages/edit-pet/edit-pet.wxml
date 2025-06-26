@@ -11,7 +11,7 @@
         <text class="upload-text">上传宠物照片</text>
       </view>
       <view class="image-preview" wx:else>
-        <image src="{{tempImagePath || petInfo.image}}" mode="aspectFill"></image>
+        <image src="{{cloudImageUrl || tempImagePath || petInfo.image}}" mode="aspectFill"></image>
         <view class="delete-image" bindtap="deleteImage">
           <text class="delete-icon">×</text>
         </view>

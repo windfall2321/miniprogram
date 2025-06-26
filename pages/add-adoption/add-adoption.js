@@ -137,11 +137,11 @@ Page({
             });
             return;
           }
-          // 只更新预览图片
-          this.setData({
-            'formData.petImage': tempFilePath,
-            tempImagePath: tempFilePath
-          });
+      // 只更新预览图片
+      this.setData({
+        'formData.petImage': tempFilePath,
+        tempImagePath: tempFilePath
+      });
         },
         fail: () => {
           wx.showToast({
@@ -277,6 +277,10 @@ Page({
 
       const imageUrl = uploadRes.data.image;
       console.log('上传成功，图片URL:', imageUrl);
+      // 修正：上传成功后写回服务器图片URL用于页面显示
+      this.setData({
+        'formData.petImage': imageUrl
+      });
 
       // 2. 创建领养信息
       const adoptionRes = await http.post('/adoption-listings/add', null, {

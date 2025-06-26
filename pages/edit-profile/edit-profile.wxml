@@ -8,7 +8,7 @@
     <!-- 头像上传区域 -->
     <view class="avatar-section">
       <view class="avatar-wrapper">
-        <image class="avatar" src="{{userInfo.profile || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+        <image class="avatar" src="{{userInfo.cloudProfile || userInfo.profile || '/images/default-avatar.png'}}" mode="aspectFill"></image>
         <view class="avatar-actions">
           <button class="upload-btn" bindtap="handleUploadAvatar">上传头像</button>
           <button class="delete-btn" bindtap="handleDeleteAvatar">删除头像</button>

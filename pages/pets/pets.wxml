@@ -18,12 +18,13 @@
       <view class="pet-main-info">
         <!-- 宠物图片 -->
         <view class="pet-image-container">
-          <image 
-            class="pet-image" 
-            src="{{item.image}}" 
-            mode="aspectFill"
-            wx:if="{{item.image}}"
-          />
+          <view wx:if="{{item.cloudImageUrl || item.image}}">
+            <image 
+              class="pet-image" 
+              src="{{item.cloudImageUrl || item.image}}" 
+              mode="aspectFill"
+            />
+          </view>
           <view class="pet-image placeholder" wx:else>
             <text class="placeholder-icon">🐾</text>
           </view>

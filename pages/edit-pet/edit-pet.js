@@ -1,5 +1,6 @@
 const http = require('../../utils/request.js');
 const config = require('../../utils/config');
+const app = getApp();
 
 // 处理图片URL
 function processImageUrl(url) {
@@ -23,6 +24,7 @@ Page({
       city: ''
     },
     tempImagePath: '',
+    cloudImageUrl: '',
     submitting: false
   },
 
@@ -84,10 +86,33 @@ Page({
       count: 1,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
-      success: (res) => {
+      success: async (res) => {
+        const tempFilePath = res.tempFilePaths[0];
         this.setData({
-          tempImagePath: res.tempFilePaths[0]
+          tempImagePath: tempFilePath
         });
+        // 新增：上传到云开发
+        try {
+          const cloudPath = 'pet-images/' + Date.now() + '-' + Math.floor(Math.random() * 1000) + tempFilePath.match(/\.[^.]+?$/)[0];
+          const uploadRes = await wx.cloud.uploadFile({
+            cloudPath,
+            filePath: tempFilePath
+          });
+          const fileID = uploadRes.fileID;
+          // 获取临时 HTTPS 链接
+          const tempUrlRes = await wx.cloud.getTempFileURL({
+            fileList: [fileID]
+          });
+          const cloudImageUrl = tempUrlRes.fileList[0].tempFileURL;
+          this.setData({
+            cloudImageUrl
+          });
+        } catch (err) {
+          wx.showToast({
+            title: '云开发图片上传失败',
+            icon: 'none'
+          });
+        }
       }
     });
   },
@@ -222,6 +247,9 @@ Page({
               wx.showToast({
                 title: '修改成功',
                 icon: 'success'
+              });
+              this.setData({
+                'petInfo.image': result.data.image
               });
               setTimeout(() => {
                 wx.navigateBack();

@@ -3,7 +3,7 @@
   <!-- 顶部用户信息卡片 -->
   <view class="user-card">
     <view class="user-info">
-      <image class="avatar" src="{{userInfo.profile || '/images/default-avatar.png'}}" mode="aspectFill" bindtap="previewAvatar"></image>
+      <image class="avatar" src="{{userInfo.cloudProfile || userInfo.profile || '/images/default-avatar.png'}}" mode="aspectFill" bindtap="previewAvatar"></image>
       <view class="user-detail">
         <text class="username">{{userInfo.username}}</text>
         <text class="welcome-text">欢迎回来</text>
@@ -17,9 +17,7 @@
     <!-- 功能菜单 -->
     <view class="menu-section">
       <view class="menu-item" bindtap="navigateToMyPets">
-        <image class="menu-icon" src="/images/pet-icon.png" mode="aspectFit"></image>
         <text class="menu-text">我的宠物</text>
-        <image class="arrow-icon" src="/images/arrow-right.png" mode="aspectFit"></image>
       </view>
     </view>
 
